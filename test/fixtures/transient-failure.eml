@@ -1,0 +1,21 @@
+From: MAILER-DAEMON@mx.example.com
+To: sender@example.net
+Subject: Delivery Status Notification
+Content-Type: multipart/report; report-type=delivery-status; boundary="BB"
+
+--BB
+Content-Type: text/plain
+
+Delivery to the following recipient failed temporarily.
+
+--BB
+Content-Type: message/delivery-status
+
+Reporting-MTA: dns; mx.example.com
+
+Final-Recipient: rfc822; recipient@example.com
+Action: failed
+Status: 4.2.2
+Diagnostic-Code: smtp; 452 4.2.2 Mailbox full
+
+--BB--

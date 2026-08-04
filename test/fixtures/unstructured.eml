@@ -1,0 +1,14 @@
+From: MAILER-DAEMON@mx.example.com
+To: sender@example.net
+Subject: Returned mail: see transcript for details
+Content-Type: multipart/report; report-type=delivery-status; boundary="BB"
+
+--BB
+Content-Type: text/plain
+
+The original message was received but could not be delivered.
+
+   ----- Transcript of session follows -----
+550 5.1.1 <recipient@example.com>... User unknown
+
+--BB--

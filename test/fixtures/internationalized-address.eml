@@ -1,0 +1,15 @@
+From: MAILER-DAEMON@mx.example.com
+To: sender@example.net
+Subject: Undelivered Mail Returned to Sender
+Content-Type: multipart/report; report-type=delivery-status; boundary="BB"
+
+--BB
+Content-Type: message/global-delivery-status
+
+Reporting-MTA: dns; mx.example.com
+
+Final-Recipient: utf-8; rené@example.com
+Action: failed
+Status: 5.1.1
+
+--BB--
