@@ -705,6 +705,13 @@
     {
       "provider": "Mail.ru",
       "reply": 550,
+      "response": "smtp;550 Message was not accepted -- invalid mailbox. Local mailbox example@mail.ru is unavailable: account is disabled",
+      "category": "invalid",
+      "permanent": true
+    },
+    {
+      "provider": "Mail.ru",
+      "reply": 550,
       "response": "smtp;550 spam message rejected. Please visit http://help.mail.ru/notspam-support/id?c=7y4ytdHbuOGv3O50NYTwpz1F-TVIpnactxtFPeFQSDYMAAAAaKgAAOX_3hE~ or report details to abuse@corp.mail.ru. Error code: ###. ID: #",
       "category": "blocked",
       "permanent": true,
@@ -1320,6 +1327,30 @@
       "permanent": true,
       "links": [
         "http://go.microsoft.com/fwlink/?LinkId=526653"
+      ]
+    },
+    {
+      "provider": "Yahoo Inc",
+      "reply": 554,
+      "status": "5.5.4",
+      "response": "smtp;554 delivery error: dd This user doesn't have a example.com account (example@example.com) [-9] - example.yahoo.com",
+      "category": "invalid",
+      "permanent": true,
+      "links": [
+        "https://postmaster.yahooinc.com/",
+        "https://postmaster.yahooinc.com/error-codes"
+      ]
+    },
+    {
+      "provider": "Yahoo Inc",
+      "reply": 554,
+      "status": "5.5.4",
+      "response": "smtp;554 delivery error: dd Sorry, your message to example@example.com cannot be delivered. This mailbox is disabled (554.30). - example.yahoo.com",
+      "category": "invalid",
+      "permanent": true,
+      "links": [
+        "https://postmaster.yahooinc.com/",
+        "https://postmaster.yahooinc.com/error-codes"
       ]
     },
     {

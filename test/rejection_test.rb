@@ -145,6 +145,9 @@ class MailBounce::RejectionTest < MailBounce::TestCase
     assert_equal :invalid, classify("550 Invalid recipient").category
     assert_equal :invalid, classify("550 No such recipient here").category
     assert_equal :invalid, classify("550 unknown user").category
+    assert_equal :invalid, classify("550 Local mailbox someone@example.com is unavailable: account is disabled").category
+    assert_equal :invalid, classify("554 delivery error: dd Sorry, your message to someone@example.com cannot be delivered. This mailbox is disabled (554.30).").category
+    assert_equal :invalid, classify("554 delivery error: dd This user doesn't have a example.com account (someone@example.com)").category
   end
 
   def test_mailbox_unavailable_alone_is_not_a_full_mailbox_either
@@ -158,6 +161,8 @@ class MailBounce::RejectionTest < MailBounce::TestCase
     assert_equal :unknown, classify("550 No such sender here").category
     assert_equal :unknown, classify("550 unknown sender").category
     assert_equal :unknown, classify("550 Sender unknown").category
+    assert_equal :unknown, classify("550 Sender mailbox is disabled").category
+    assert_equal :unknown, classify("554 This user doesn't have a sending account").category
   end
 
   # Wording that names no address names ours as readily as theirs, and a

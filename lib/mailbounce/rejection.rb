@@ -28,7 +28,7 @@ module MailBounce
     # not exist" would read as a dead recipient.
     # No "mailbox unavailable": RFC 5321 §4.2.3 uses that phrase for both 450
     # (busy / temp policy) and 550 (not found / no access / policy).
-    INVALID_TEXT = /user unknown|unknown user|no such (?:user|recipient)|recipient not found|invalid recipient/i
+    INVALID_TEXT = /user unknown|unknown user|no such (?:user|recipient)|recipient not found|invalid recipient|local mailbox \S+ is unavailable: account is disabled|message to \S+ cannot be delivered\. this mailbox is disabled|user doesn't have an? \S+ account \(\S+@/i
 
     # No bare "quota exceeded": a sender's sending quota says it too.
     FULL_TEXT = /mailbox (?:is )?full|over ?quota|(?:mailbox|user|disk) quota exceeded|mailbox size limit exceeded|exceeded storage allocation/i
