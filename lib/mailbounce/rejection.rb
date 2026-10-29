@@ -36,12 +36,12 @@ module MailBounce
     # How much mail is arriving, at the mailbox or from the sender.
     RATE_TEXT = /\brate\b|too quickly|too many (?:recent )?messages|frequency|per hour/i
 
-    # A quota or a rate is a cause other than a gone mailbox.
-    OTHER_CAUSE_TEXT = Regexp.union(FULL_TEXT, RATE_TEXT, /quota/i)
+    # A quota, a rate or a policy error is a cause other than a gone mailbox.
+    OTHER_CAUSE_TEXT = Regexp.union(FULL_TEXT, RATE_TEXT, /quota|policy error/i)
 
     OVERSIZED_TEXT = /message (?:is )?too large|exceeds the maximum size|message size limit/i
 
-    BLOCKED_TEXT = /blocked|blacklist|spam|denied/i
+    BLOCKED_TEXT = /blocked|block ?list|blacklist|spam|denied|(?:message|relay) not allowed|\bpolic(?:y|ies)\b|dmarc|\bspf\b|dkim|\bptr\b|spoof|banned|virus|invalid sender/i
 
     QUAD = /(?:\d{1,3}\.){3}\d{1,3}/
 

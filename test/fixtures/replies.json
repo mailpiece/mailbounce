@@ -377,6 +377,13 @@
     {
       "filter": "Mimecast",
       "reply": 451,
+      "response": "smtp;451 Open relay not allowed - https://community.mimecast.com/docs/DOC-1369#451 [#]",
+      "category": "blocked",
+      "permanent": false
+    },
+    {
+      "filter": "Mimecast",
+      "reply": 451,
       "response": "smtp;451 Internal resource temporarily unavailable - https://community.mimecast.com/docs/DOC-1369#451 [#]",
       "category": "unknown",
       "permanent": false
@@ -463,6 +470,13 @@
     {
       "provider": "Zoho",
       "reply": 452,
+      "response": "smtp;452 <example@zoho.com> Mailbox delivery restricted by policy error",
+      "category": "blocked",
+      "permanent": false
+    },
+    {
+      "provider": "Zoho",
+      "reply": 452,
       "status": "4.3.1",
       "response": "smtp;452 4.3.1 Temporary System Error",
       "category": "blocked",
@@ -527,6 +541,13 @@
       "links": [
         "https://postmaster.gmx.net/en/error-messages"
       ]
+    },
+    {
+      "provider": "Orange",
+      "reply": 501,
+      "response": "smtp;501 5.1.0 Emetteur invalide. Invalid Sender. OFR004_405 [405]",
+      "category": "blocked",
+      "permanent": true
     },
     {
       "provider": "Rambler",
@@ -696,6 +717,14 @@
       ]
     },
     {
+      "provider": "Comcast",
+      "reply": 550,
+      "status": "5.2.0",
+      "response": "smtp;550 5.2.0 Message rejected due to DMARC. Please see http://postmaster.comcast.net/smtp-error-codes.php#DM000001",
+      "category": "blocked",
+      "permanent": true
+    },
+    {
       "provider": "Outlook",
       "reply": 550,
       "status": "5.7.1",
@@ -811,6 +840,26 @@
       ]
     },
     {
+      "provider": "Free",
+      "reply": 550,
+      "response": "smtp;550 virus detected",
+      "category": "blocked",
+      "permanent": true,
+      "links": [
+        "https://postmaster.free.fr/index_en.html"
+      ]
+    },
+    {
+      "provider": "GMX",
+      "reply": 550,
+      "response": "Requested action not taken: mailbox unavailable Reject due to policy restrictions.",
+      "category": "blocked",
+      "permanent": false,
+      "links": [
+        "https://www.gmx.net/mail/senderguidelines/"
+      ]
+    },
+    {
       "provider": "Rackspace",
       "reply": 550,
       "status": "5.1.1",
@@ -865,6 +914,16 @@
       "permanent": true,
       "links": [
         "https://service.mail.qq.com/cgi-bin/help?subtype=1&&id=20022&&no=1001461"
+      ]
+    },
+    {
+      "provider": "QQ",
+      "reply": 550,
+      "response": "smtp;550 DMARC check failed http://service.mail.qq.com/cgi-bin/help?subtype=1&&no=1001508&&id=16.",
+      "category": "blocked",
+      "permanent": true,
+      "links": [
+        "http://service.mail.qq.com/cgi-bin/help?subtype=1&&no=1001508&&id=16"
       ]
     },
     {
@@ -923,6 +982,16 @@
     {
       "provider": "Web.de",
       "reply": 550,
+      "response": "smtp;550 <example@example.com>: Reject due to SPF policy. The originating IP of the message is not permitted by the domain owner",
+      "category": "blocked",
+      "permanent": true,
+      "links": [
+        "https://postmaster.web.de/en/error-messages"
+      ]
+    },
+    {
+      "provider": "Web.de",
+      "reply": 550,
       "response": "smtp;550 <example@example.com>: Syntax error in parameters or arguments",
       "category": "unknown",
       "permanent": true,
@@ -933,8 +1002,58 @@
     {
       "provider": "Web.de",
       "reply": 550,
+      "response": "smtp;550 <example@example.com>: Bad DNS PTR resource record",
+      "category": "blocked",
+      "permanent": true,
+      "links": [
+        "https://postmaster.web.de/en/error-messages"
+      ]
+    },
+    {
+      "provider": "Web.de",
+      "reply": 550,
+      "response": "smtp;550 <example@example.com>: Reject due to policy restrictions (header based)",
+      "category": "blocked",
+      "permanent": true,
+      "links": [
+        "https://postmaster.web.de/en/email-policy"
+      ]
+    },
+    {
+      "provider": "Web.de",
+      "reply": 550,
+      "response": "smtp;550 <example@example.com>: Reject due to policy restrictions (domain based)",
+      "category": "blocked",
+      "permanent": true,
+      "links": [
+        "https://postmaster.web.de/en/email-policy"
+      ]
+    },
+    {
+      "provider": "Web.de",
+      "reply": 550,
+      "response": "smtp;550 <example@example.com>: Reject due to policy restrictions (IP based)",
+      "category": "blocked",
+      "permanent": true,
+      "links": [
+        "https://postmaster.web.de/en/email-policy"
+      ]
+    },
+    {
+      "provider": "Web.de",
+      "reply": 550,
       "response": "smtp;550 <example@example.com>: Requested mail action aborted: exceeded storage allocation, Quota exceeded",
       "category": "full",
+      "permanent": true,
+      "links": [
+        "https://postmaster.web.de/en/error-messages"
+      ]
+    },
+    {
+      "provider": "Web.de",
+      "reply": 550,
+      "response": "smtp;550 <example@example.com>: IP address is block listed",
+      "category": "blocked",
       "permanent": true,
       "links": [
         "https://postmaster.web.de/en/error-messages"
@@ -950,6 +1069,16 @@
     {
       "filter": "Mimecast",
       "reply": 550,
+      "response": "smtp;550 Rejected by header based Anti-Spoofing policy: email@example.com - https://community.mimecast.com/docs/DOC-1369#550 [#]",
+      "category": "blocked",
+      "permanent": true,
+      "links": [
+        "https://community.mimecast.com/s/article/Configuring-Anti-Spoofing-Policies-1695615136"
+      ]
+    },
+    {
+      "filter": "Mimecast",
+      "reply": 550,
       "response": "smtp;550 Rejected by header based manually Blocked Senders: email@example.com - https://community.mimecast.com/docs/DOC-1369#550 [#]",
       "category": "blocked",
       "permanent": true
@@ -958,6 +1087,16 @@
       "filter": "Mimecast",
       "reply": 550,
       "response": "smtp;550 Envelope blocked - User Entry - https://community.mimecast.com/docs/DOC-1369#550 [#]",
+      "category": "blocked",
+      "permanent": true,
+      "links": [
+        "https://community.mimecast.com/s/article/Mimecast-SMTP-Error-Codes-842605754"
+      ]
+    },
+    {
+      "filter": "Mimecast",
+      "reply": 550,
+      "response": "smtp;550 DMARC Sender Invalid - envelope rejected - https://community.mimecast.com/docs/DOC-1369#550 [#]",
       "category": "blocked",
       "permanent": true,
       "links": [
@@ -1133,6 +1272,13 @@
     {
       "filter": "Barracuda",
       "reply": 550,
+      "response": "smtp;550 rejecting spoofed message",
+      "category": "blocked",
+      "permanent": true
+    },
+    {
+      "filter": "Barracuda",
+      "reply": 550,
       "response": "smtp;550 permanent failure for one or more recipients (email@example.com:blocked)",
       "category": "blocked",
       "permanent": true,
@@ -1239,6 +1385,14 @@
       "links": [
         "http://mail.google.com/support/bin/answer.py?answer=6590"
       ]
+    },
+    {
+      "provider": "Zoho",
+      "reply": 552,
+      "status": "5.1.1",
+      "response": "smtp;552 5.1.1 <example@zoho.com> Mailbox delivery failure policy error",
+      "category": "blocked",
+      "permanent": true
     },
     {
       "provider": "Zoho",
@@ -1419,6 +1573,42 @@
       ]
     },
     {
+      "provider": "Yahoo Inc",
+      "reply": 554,
+      "status": "5.5.4",
+      "response": "smtp;554 Message not allowed - [PH01] Email not accepted for policy reasons. Please visit https://postmaster.yahooinc.com/error-codes",
+      "category": "blocked",
+      "permanent": true,
+      "links": [
+        "https://postmaster.yahooinc.com/sender-request",
+        "https://postmaster.yahooinc.com/",
+        "https://postmaster.yahooinc.com/error-codes"
+      ]
+    },
+    {
+      "provider": "Yahoo Inc",
+      "reply": 554,
+      "status": "5.5.4",
+      "response": "smtp;554 Message not allowed - Headers are not RFC compliant[291]",
+      "category": "blocked",
+      "permanent": true,
+      "links": [
+        "https://tools.ietf.org/html/rfc2822"
+      ]
+    },
+    {
+      "provider": "Yahoo Inc",
+      "reply": 554,
+      "status": "5.5.4",
+      "response": "smtp;554 Message not allowed - [299]",
+      "category": "blocked",
+      "permanent": true,
+      "links": [
+        "https://postmaster.yahooinc.com/",
+        "https://postmaster.yahooinc.com/error-codes"
+      ]
+    },
+    {
       "provider": "Yandex",
       "reply": 554,
       "status": "5.7.1",
@@ -1496,6 +1686,13 @@
       ]
     },
     {
+      "filter": "Mimecast",
+      "reply": 554,
+      "response": "smtp;554 Email rejected due to security policies - https://community.mimecast.com/docs/DOC-1369#554 [#]",
+      "category": "blocked",
+      "permanent": true
+    },
+    {
       "filter": "Proofpoint",
       "reply": 554,
       "status": "5.7.1",
@@ -1542,6 +1739,13 @@
       "links": [
         "http://multirbl.valli.org"
       ]
+    },
+    {
+      "filter": "Barracuda",
+      "reply": 554,
+      "response": "smtp;554 rejecting banned content",
+      "category": "blocked",
+      "permanent": true
     }
   ]
 }

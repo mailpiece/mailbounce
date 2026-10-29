@@ -130,7 +130,24 @@ class MailBounce::RejectionTest < MailBounce::TestCase
     assert_equal :blocked, classify("550 5.2.1 The user you are trying to contact is receiving mail at a rate that prevents additional messages").category
     assert_equal :full, classify("452 4.1.1 <someone@example.com> user over quota").category
     assert_equal :unknown, classify("552 5.1.1 <someone@example.com> recipient rejected - extended quota violation").category
+    assert_equal :blocked, classify("552 5.1.1 <someone@example.com> Mailbox delivery failure policy error").category
     assert_equal :invalid, classify("550 5.1.1 <rate@example.com>: User unknown").category
+    assert_equal :invalid, classify("550 5.1.1 Mailbox does not exist. See https://example.com/postmaster/policies").category
+  end
+
+  def test_a_refusal_over_the_sender_or_the_message_is_blocked_however_it_is_worded
+    assert_equal :blocked, classify("550 5.2.0 Message rejected due to DMARC").category
+    assert_equal :blocked, classify("550 Reject due to SPF policy").category
+    assert_equal :blocked, classify("550 Bad DNS PTR resource record").category
+    assert_equal :blocked, classify("550 IP address is block listed").category
+    assert_equal :blocked, classify("550 Reject due to policy restrictions (IP based)").category
+    assert_equal :blocked, classify("550 rejecting spoofed message").category
+    assert_equal :blocked, classify("554 rejecting banned content").category
+    assert_equal :blocked, classify("550 virus detected").category
+    assert_equal :blocked, classify("501 5.1.0 Emetteur invalide. Invalid Sender.").category
+    assert_equal :blocked, classify("554 Message not allowed - [299]").category
+    assert_equal :unknown, classify("550 Unrouteable address, recipient domain has no DNS records").category
+    assert_equal :unknown, classify("550 Recipient not allowed").category
   end
 
   def test_an_unrecognized_condition_yields_to_wording_that_names_the_cause

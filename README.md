@@ -71,7 +71,7 @@ rejection.about_us?   # => false - the response doesn't quote our own sending IP
 | `:invalid`   | The mailbox doesn't exist - the one category that can last, and only when `permanent?`     |
 | `:full`      | The mailbox exists and is over quota                                                       |
 | `:oversized` | This message was too large; another might not be                                           |
-| `:blocked`   | Policy, reputation, rate, or the network - about the exchange, not the address             |
+| `:blocked`   | Policy, reputation, authentication, content, rate, or the network - not the address        |
 | `:unknown`   | Nothing matched                                                                            |
 
 
