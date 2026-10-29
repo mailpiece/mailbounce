@@ -1,0 +1,1359 @@
+{
+  "links": {
+    "AT&T": [
+      "https://www.att.com/support/article/email-support/KM1401980/"
+    ],
+    "Apple": [
+      "https://support.apple.com/en-us/HT204137"
+    ],
+    "Barracuda": [
+      "https://campus.barracuda.com/product/emailsecuritygateway/doc/39815000/smtp-error-codes/"
+    ],
+    "Email Security.cloud": [
+      "https://knowledge.broadcom.com/external/article/165144/smtp-bounce-back-error-codes-for-email-s.html"
+    ],
+    "Exchange Online Protection": [
+      "https://docs.microsoft.com/en-us/exchange/mail-flow-best-practices/non-delivery-reports-in-exchange-online/non-delivery-reports-in-exchange-online"
+    ],
+    "ImprovMX": [
+      "https://improvmx.com/guides/improvmx-error-codes/"
+    ],
+    "Mail.ru": [
+      "https://help.mail.ru/notspam-support/errors"
+    ],
+    "Mimecast": [
+      "https://community.mimecast.com/s/article/Mimecast-SMTP-Error-Codes-842605754"
+    ],
+    "Proofpoint": [
+      "https://help.proofpoint.com/Proofpoint_Essentials/Email_Security/Administrator_Topics/110_logs/Common_Error_Codes_found_in_Message_Details"
+    ],
+    "Rambler": [
+      "https://help.rambler.ru/mail/mail-soobsheniya-ob-oshibkah/1326/"
+    ],
+    "Web.de": [
+      "https://postmaster.web.de/en/error-messages"
+    ],
+    "Yandex": [
+      "https://yandex.com/support/mail/bounces/yandex.html"
+    ],
+    "Zoho": [
+      "https://www.zoho.com/mail/help/spam-reason.html"
+    ]
+  },
+  "replies": [
+    {
+      "provider": "Google",
+      "reply": 421,
+      "status": "4.7.0",
+      "response": "smtp;421 4.7.0 [203.0.113.9] Our system has detected that this message is suspicious due to the very low reputation of the sending domain. To best protect our users from spam, the message has been blocked. Please visit https://support.google.com/mail/answer/188131 for more information. - gsmtp",
+      "category": "blocked",
+      "permanent": false,
+      "about_us": true,
+      "links": [
+        "https://support.google.com/mail/answer/188131"
+      ]
+    },
+    {
+      "provider": "Google",
+      "reply": 421,
+      "status": "4.7.0",
+      "response": "smtp;421 4.7.0 [203.0.113.9] Our system has detected that this message is suspicious due to the nature of the content and/or the links within. To best protect our users from spam, the message has been blocked. Please visit https://support.google.com/mail/answer/188131 for more information. - gsmtp",
+      "category": "blocked",
+      "permanent": false,
+      "about_us": true,
+      "links": [
+        "https://support.google.com/mail/answer/188131"
+      ]
+    },
+    {
+      "provider": "Google",
+      "reply": 421,
+      "status": "4.7.28",
+      "response": "421 4.7.28 [203.0.113.9] Our system has detected an unusual rate of unsolicited mail originating from your IP address. To protect our users from spam, mail sent from your IP address has been temporarily rate limited. Please visit https://support.google.com/mail/?p=UnsolicitedRateLimitError to review our Bulk Email Senders Guidelines. - gsmtp",
+      "category": "blocked",
+      "permanent": false,
+      "about_us": true,
+      "links": [
+        "https://support.google.com/mail/answer/81126"
+      ]
+    },
+    {
+      "provider": "Google",
+      "reply": 421,
+      "status": "4.7.32",
+      "response": "4.7.32 This mail has been rate limited because there is no DMARC alignment",
+      "category": "blocked",
+      "permanent": false,
+      "links": [
+        "https://support.google.com/a/answer/10032578"
+      ]
+    },
+    {
+      "provider": "Yahoo Inc",
+      "reply": 421,
+      "status": "4.0.0",
+      "response": "smtp;421 Service not available, closing transmission channel",
+      "category": "unknown",
+      "permanent": false,
+      "links": [
+        "https://postmaster.yahooinc.com/",
+        "https://postmaster.yahooinc.com/error-codes"
+      ]
+    },
+    {
+      "provider": "Yahoo Inc",
+      "reply": 421,
+      "status": "4.0.0",
+      "response": "smtp;421 Max message per connection reached, closing transmission channel",
+      "category": "unknown",
+      "permanent": false,
+      "links": [
+        "https://postmaster.yahooinc.com/",
+        "https://postmaster.yahooinc.com/error-codes"
+      ]
+    },
+    {
+      "provider": "Yahoo Inc",
+      "reply": 421,
+      "status": "4.7.0",
+      "response": "smtp;421 4.7.0 [TSS04] Messages from 203.0.113.9 temporarily deferred due to unexpected volume or user complaints - 4.16.55.1; see https://postmaster.yahooinc.com/error-codes",
+      "category": "blocked",
+      "permanent": false,
+      "about_us": true,
+      "links": [
+        "https://postmaster.yahooinc.com/",
+        "https://postmaster.yahooinc.com/error-codes"
+      ]
+    },
+    {
+      "provider": "Outlook",
+      "reply": 421,
+      "status": "4.3.2",
+      "response": "smtp;421 4.3.2 Service not available [outlook.com]",
+      "category": "blocked",
+      "permanent": false
+    },
+    {
+      "provider": "Yandex",
+      "reply": 421,
+      "status": "4.4.2",
+      "response": "smtp;421 4.4.2 mail.yandex.net Error: timeout exceeded",
+      "category": "blocked",
+      "permanent": false
+    },
+    {
+      "provider": "Apple",
+      "reply": 421,
+      "status": "4.7.0",
+      "response": "smtp;421 4.7.0 me.com Error: too many errors",
+      "category": "blocked",
+      "permanent": false,
+      "links": [
+        "https://support.apple.com/en-us/HT204137"
+      ]
+    },
+    {
+      "provider": "Apple",
+      "reply": 421,
+      "status": "4.7.1",
+      "response": "smtp;421 4.7.1 Messages to example@icloud.com deferred due to excessive volume. Try again later - https://support.apple.com/en-us/HT204137",
+      "category": "blocked",
+      "permanent": false,
+      "links": [
+        "https://support.apple.com/en-us/HT204137"
+      ]
+    },
+    {
+      "filter": "Exchange Online Protection",
+      "reply": 421,
+      "status": "4.3.2",
+      "response": "smtp;421 4.3.2 The maximum number of concurrent connections per resource forest has exceeded a limit, closing transmission channel. example.com. PRX8 [example.com]",
+      "category": "blocked",
+      "permanent": false
+    },
+    {
+      "filter": "Barracuda",
+      "reply": 421,
+      "response": "smtp;421 Temporary failure, please try again later.",
+      "category": "unknown",
+      "permanent": false
+    },
+    {
+      "filter": "Barracuda",
+      "reply": 422,
+      "response": "smtp;422 License Expired",
+      "category": "unknown",
+      "permanent": false
+    },
+    {
+      "filter": "Email Security.cloud",
+      "reply": 421,
+      "response": "smtp;421 Service Temporarily Unavailable",
+      "category": "unknown",
+      "permanent": false
+    },
+    {
+      "provider": "Outlook",
+      "reply": 450,
+      "status": "4.7.3",
+      "response": "smtp;450 4.7.3 Organization queue quota exceeded. [outlook.com]",
+      "category": "blocked",
+      "permanent": false
+    },
+    {
+      "provider": "Infomaniak",
+      "reply": 450,
+      "status": "4.1.8",
+      "response": "smtp;450 4.1.8 Sender address rejected: Domain not found (in reply to RCPT TO command))",
+      "category": "blocked",
+      "permanent": false
+    },
+    {
+      "provider": "Comcast",
+      "reply": 450,
+      "status": "4.2.0",
+      "response": "smtp;450 4.2.0 <example@comcast.net> - Recipient temporarily unavailable",
+      "category": "unknown",
+      "permanent": false
+    },
+    {
+      "filter": "Email Security.cloud",
+      "reply": 450,
+      "response": "smtp;450 Requested action aborted [9] #-#, please visit https://knowledge.broadcom.com/external/article?legacyId=TECH246726 for more details about this error message.",
+      "category": "unknown",
+      "permanent": false
+    },
+    {
+      "filter": "ZeroSpam",
+      "reply": 450,
+      "status": "4.2.0",
+      "response": "smtp;450 4.2.0 <email@example.com>: Recipient address rejected: example.com greylisted for 60 seconds by ZEROSPAM",
+      "category": "blocked",
+      "permanent": false
+    },
+    {
+      "provider": "Google",
+      "reply": 451,
+      "status": "4.3.0",
+      "response": "smtp;451 4.3.0 Mail server temporarily rejected message. - gsmtp",
+      "category": "blocked",
+      "permanent": false,
+      "links": [
+        "https://support.google.com/mail/answer/81126"
+      ]
+    },
+    {
+      "provider": "Yahoo Inc",
+      "reply": 451,
+      "status": "4.0.0",
+      "response": "smtp;451 example.yahoo.com Resources temporarily unavailable. Please try again later [#4.16.1].",
+      "category": "unknown",
+      "permanent": false,
+      "links": [
+        "https://postmaster.yahooinc.com/",
+        "https://postmaster.yahooinc.com/error-codes"
+      ]
+    },
+    {
+      "provider": "Yahoo Inc",
+      "reply": 451,
+      "status": "4.0.0",
+      "response": "smtp;451 4.3.2 Internal server error",
+      "category": "blocked",
+      "permanent": false,
+      "links": [
+        "https://postmaster.yahooinc.com/",
+        "https://postmaster.yahooinc.com/error-codes"
+      ]
+    },
+    {
+      "provider": "Outlook",
+      "reply": 451,
+      "status": "4.3.2",
+      "response": "smtp;451 4.3.2 Temporary server error. Please try again later ATTR17 [outlook.com]",
+      "category": "blocked",
+      "permanent": false
+    },
+    {
+      "provider": "Outlook",
+      "reply": 451,
+      "status": "4.4.0",
+      "response": "smtp;451 4.4.0 Message failed to be replicated: No healthy secondary server available to accept replica at this time. [outlook.com]",
+      "category": "blocked",
+      "permanent": false
+    },
+    {
+      "provider": "Outlook",
+      "reply": 451,
+      "status": "4.7.0",
+      "response": "smtp;451 4.7.0 Temporary server error. Please try again later. PRX6 NextHop: outlook.com [outlook.com]",
+      "category": "blocked",
+      "permanent": false
+    },
+    {
+      "provider": "Outlook",
+      "reply": 451,
+      "status": "4.7.650",
+      "response": "451 4.7.650 The mail server [203.0.113.9] has been temporarily rate limited due to IP reputation. For e-mail delivery information, see https://postmaster.live.com (S843)[#.prod.protection.outlook.com]",
+      "category": "blocked",
+      "permanent": false,
+      "about_us": true
+    },
+    {
+      "provider": "Outlook",
+      "reply": 451,
+      "status": "4.7.651",
+      "response": "451 4.7.651 The mail server [203.0.113.9] has been temporarily rate limited due to IP reputation. For e-mail delivery information, see https://postmaster.live.com (S3114) [#.prod.outlook.com #]",
+      "category": "blocked",
+      "permanent": false,
+      "about_us": true
+    },
+    {
+      "provider": "Yandex",
+      "reply": 451,
+      "status": "4.7.1",
+      "response": "smtp;451 4.7.1 Sorry, the service is currently unavailable. Please come back later.",
+      "category": "blocked",
+      "permanent": false
+    },
+    {
+      "provider": "Apple",
+      "reply": 451,
+      "status": "4.7.1",
+      "response": "smtp;451 4.7.1 Service unavailable - try again later",
+      "category": "blocked",
+      "permanent": false,
+      "links": [
+        "https://support.apple.com/en-us/HT204137"
+      ]
+    },
+    {
+      "provider": "Zoho",
+      "reply": 541,
+      "status": "5.4.1",
+      "response": "smtp;541 5.4.1 Mail rejected by destination domain",
+      "category": "blocked",
+      "permanent": true
+    },
+    {
+      "filter": "Mimecast",
+      "reply": 451,
+      "response": "smtp;451 Internal resource temporarily unavailable - https://community.mimecast.com/docs/DOC-1369#451 [#]",
+      "category": "unknown",
+      "permanent": false
+    },
+    {
+      "filter": "Mimecast",
+      "reply": 451,
+      "response": "smtp;451 Invalid Recipient - https://community.mimecast.com/docs/DOC-1369#451 [#]",
+      "category": "invalid",
+      "permanent": false
+    },
+    {
+      "filter": "Exchange Online Protection",
+      "reply": 451,
+      "status": "4.7.0",
+      "response": "smtp;451 4.7.0 Temporary server error. Please try again later. PRX4 NextHop: example.com [example.com]",
+      "category": "blocked",
+      "permanent": false
+    },
+    {
+      "filter": "Exchange Online Protection",
+      "reply": 451,
+      "status": "4.7.500",
+      "response": "smtp;451 4.7.500 Server busy. Please try again later from [203.0.113.9]. (AS77712344) [#.prod.protection.outlook.com]",
+      "category": "blocked",
+      "permanent": false,
+      "about_us": true
+    },
+    {
+      "filter": "Barracuda",
+      "reply": 451,
+      "status": "4.7.1",
+      "response": "smtp;451 4.7.1 <email@example.com>: Recipient address rejected: Greylisted for 5 minutes",
+      "category": "blocked",
+      "permanent": false
+    },
+    {
+      "filter": "Barracuda",
+      "reply": 451,
+      "status": "4.7.1",
+      "response": "smtp;451 4.7.1 Try again later",
+      "category": "blocked",
+      "permanent": false
+    },
+    {
+      "provider": "Google",
+      "reply": 452,
+      "status": "4.2.2",
+      "response": "smtp;452 4.2.2 The email account that you tried to reach is over quota. Please direct the recipient to https://support.google.com/mail/?p=OverQuotaTemp - gsmtp",
+      "category": "full",
+      "permanent": false,
+      "links": [
+        "https://support.google.com/mail/answer/6374270?p=OverQuotaTemp&visit_id=637466814024175068-236829835&rd=2"
+      ]
+    },
+    {
+      "provider": "Yahoo Inc",
+      "reply": 452,
+      "status": "4.0.0",
+      "response": "smtp;452 temporary domain failure <example@example.com>",
+      "category": "unknown",
+      "permanent": false,
+      "links": [
+        "https://postmaster.yahooinc.com/",
+        "https://postmaster.yahooinc.com/error-codes"
+      ]
+    },
+    {
+      "provider": "Outlook",
+      "reply": 452,
+      "status": "4.3.1",
+      "response": "smtp;452 4.3.1 Insufficient system resources (TSTE) [outlook.com]",
+      "category": "blocked",
+      "permanent": false
+    },
+    {
+      "provider": "Zoho",
+      "reply": 452,
+      "status": "4.3.1",
+      "response": "smtp;452 4.3.1 Temporary System Error",
+      "category": "blocked",
+      "permanent": false
+    },
+    {
+      "provider": "Rambler",
+      "reply": 452,
+      "status": "4.5.3",
+      "response": "smtp;452 4.5.3  rate limit exceeded",
+      "category": "blocked",
+      "permanent": false
+    },
+    {
+      "provider": "Outlook",
+      "reply": 501,
+      "status": "5.1.3",
+      "response": "smtp;501 5.1.3 Invalid address [outlook.com]",
+      "category": "invalid",
+      "permanent": true
+    },
+    {
+      "provider": "Yahoo Inc",
+      "reply": 501,
+      "status": "5.0.0",
+      "response": "smtp;501 Syntax error in parameters or arguments",
+      "category": "unknown",
+      "permanent": true,
+      "links": [
+        "https://postmaster.yahooinc.com/",
+        "https://postmaster.yahooinc.com/error-codes"
+      ]
+    },
+    {
+      "provider": "GMX",
+      "reply": 501,
+      "response": "smtp;501 Syntax error in parameters or arguments",
+      "category": "unknown",
+      "permanent": true,
+      "links": [
+        "https://postmaster.gmx.net/en/error-messages"
+      ]
+    },
+    {
+      "provider": "Rambler",
+      "reply": 540,
+      "status": "5.7.1",
+      "response": "smtp;540 5.7.1 <example@rambler.ru>: recipient address rejected: Blocked",
+      "category": "blocked",
+      "permanent": true
+    },
+    {
+      "provider": "Google",
+      "reply": 550,
+      "status": "5.1.1",
+      "response": "smtp;550 5.1.1 The email account that you tried to reach does not exist. Please try double-checking the recipient's email address for typos or unnecessary spaces. Learn more at https://support.google.com/mail/?p=NoSuchUser - gsmtp",
+      "category": "invalid",
+      "permanent": true,
+      "links": [
+        "https://support.google.com/mail/answer/188131"
+      ]
+    },
+    {
+      "provider": "Google",
+      "reply": 550,
+      "status": "5.2.1",
+      "response": "smtp;550 5.2.1 The email account that you tried to reach is disabled. Learn more at https://support.google.com/mail/?p=DisabledUser - gsmtp",
+      "category": "invalid",
+      "permanent": true,
+      "links": [
+        "https://support.google.com/mail/answer/81126"
+      ]
+    },
+    {
+      "provider": "Google",
+      "reply": 550,
+      "status": "5.7.1",
+      "response": "smtp;550 5.7.1 [203.0.113.9] Our system has detected that this message is likely suspicious due to the very low reputation of the sending domain. To best protect our users from spam, the message has been blocked. Please visit https://support.google.com/mail/answer/188131 for more information. - gsmtp",
+      "category": "blocked",
+      "permanent": true,
+      "about_us": true,
+      "links": [
+        "https://support.google.com/mail/answer/81126"
+      ]
+    },
+    {
+      "provider": "Google",
+      "reply": 550,
+      "status": "5.7.1",
+      "response": "smtp;550 5.7.1 [203.0.113.9] Our system has detected that this message is likely unsolicited mail. To reduce the amount of spam sent to Gmail, this message has been blocked. Please visit https://support.google.com/mail/?p=UnsolicitedMessageError for more information. - gsmtp",
+      "category": "blocked",
+      "permanent": true,
+      "about_us": true,
+      "links": [
+        "https://support.google.com/mail/?p=UnsolicitedRateLimitError"
+      ]
+    },
+    {
+      "provider": "Google",
+      "reply": 550,
+      "status": "5.7.1",
+      "response": "smtp;550 5.7.1 Unauthenticated email from example.com is not accepted due to domain's DMARC policy. Please contact the administrator of example.com domain if this was a legitimate mail. Please visit https://support.google.com/mail/answer/2451690 to learn about the DMARC initiative. - gsmtp",
+      "category": "blocked",
+      "permanent": true,
+      "links": [
+        "https://support.google.com/mail/answer/81126"
+      ]
+    },
+    {
+      "provider": "Google",
+      "reply": 550,
+      "status": "5.7.1",
+      "response": "smtp;550 5.7.1 [203.0.113.9 14] Messages missing a valid address in From: header, or having no From: header, are not accepted. - gsmtp",
+      "category": "blocked",
+      "permanent": true,
+      "about_us": true,
+      "links": [
+        "https://tools.ietf.org/html/rfc2822#appendix-A.6"
+      ]
+    },
+    {
+      "provider": "Yahoo Inc",
+      "reply": 550,
+      "status": "5.0.0",
+      "response": "smtp;550 relaying denied for <example@example.com>",
+      "category": "blocked",
+      "permanent": true,
+      "links": [
+        "https://postmaster.yahooinc.com/",
+        "https://postmaster.yahooinc.com/error-codes"
+      ]
+    },
+    {
+      "provider": "Apple",
+      "reply": 550,
+      "status": "5.1.1",
+      "response": "smtp;550 5.1.1 <example@icloud.com>: user does not exist",
+      "category": "invalid",
+      "permanent": true,
+      "links": [
+        "https://support.apple.com/en-us/HT204137"
+      ]
+    },
+    {
+      "provider": "Apple",
+      "reply": 550,
+      "status": "5.7.1",
+      "response": "smtp;550 5.7.1 [CS01] Message rejected due to local policy. Please visit https://support.apple.com/en-us/HT204137",
+      "category": "blocked",
+      "permanent": true,
+      "links": [
+        "https://support.apple.com/en-us/HT204137"
+      ]
+    },
+    {
+      "provider": "Apple",
+      "reply": 550,
+      "status": "5.7.1",
+      "response": "smtp;550 5.7.1 Your message was rejected due to example.com’s DMARC policy. See https://support.apple.com/en-us/HT204137 for info",
+      "category": "blocked",
+      "permanent": true,
+      "links": [
+        "https://support.apple.com/en-us/HT204137"
+      ]
+    },
+    {
+      "provider": "Apple",
+      "reply": 550,
+      "status": "5.7.1",
+      "response": "smtp;550 5.7.1 Your email was rejected due to having a domain present in the Spamhaus DBL -- see https://www.spamhaus.org/dbl/",
+      "category": "blocked",
+      "permanent": true,
+      "links": [
+        "https://www.spamhaus.org/lookup/"
+      ]
+    },
+    {
+      "provider": "Comcast",
+      "reply": 550,
+      "status": "5.1.1",
+      "response": "smtp;550 5.1.1 Not our Customer",
+      "category": "invalid",
+      "permanent": true,
+      "links": [
+        "http://postmaster.comcast.net/"
+      ]
+    },
+    {
+      "provider": "Comcast",
+      "reply": 550,
+      "status": "5.1.1",
+      "response": "smtp;550 5.1.1 <example@comcast.net> recipient mailbox unallocated",
+      "category": "invalid",
+      "permanent": true,
+      "links": [
+        "http://postmaster.comcast.net/"
+      ]
+    },
+    {
+      "provider": "Outlook",
+      "reply": 550,
+      "status": "5.7.1",
+      "response": "smtp;550 5.7.1 Service unavailable, MailFrom domain is listed in Spamhaus. To request removal from this list see https://www.spamhaus.org/query/lookup/ (S8002) [#.eop-nam02.prod.protection.outlook.com]",
+      "category": "blocked",
+      "permanent": true,
+      "links": [
+        "https://www.spamhaus.org/lookup/"
+      ]
+    },
+    {
+      "provider": "Outlook",
+      "reply": 550,
+      "status": "5.7.1",
+      "response": "smtp;550 5.7.1 Unfortunately, messages from [203.0.113.9] weren't sent. Please contact your Internet service provider since part of their network is on our block list (S3150). You can also refer your provider to http://mail.live.com/mail/troubleshooting.aspx#errors. [#.eop-nam02.prod.protection.outlook.com]",
+      "category": "blocked",
+      "permanent": true,
+      "about_us": true,
+      "links": [
+        "https://sendersupport.olc.protection.outlook.com/pm/troubleshooting.aspx"
+      ]
+    },
+    {
+      "provider": "Mail.ru",
+      "reply": 550,
+      "response": "smtp;550 spam message rejected. Please visit http://help.mail.ru/notspam-support/id?c=7y4ytdHbuOGv3O50NYTwpz1F-TVIpnactxtFPeFQSDYMAAAAaKgAAOX_3hE~ or report details to abuse@corp.mail.ru. Error code: ###. ID: #",
+      "category": "blocked",
+      "permanent": true,
+      "links": [
+        "https://help.mail.ru/notspam-support/errors/550spam"
+      ]
+    },
+    {
+      "provider": "Yandex",
+      "reply": 550,
+      "status": "5.7.1",
+      "response": "smtp;550 5.7.1 Policy rejection on the target address",
+      "category": "blocked",
+      "permanent": true,
+      "links": [
+        "https://yandex.com/support/mail/bounces/yandex.html",
+        "https://yandex.com/legal/rules/"
+      ]
+    },
+    {
+      "provider": "AT&T",
+      "reply": 550,
+      "status": "5.7.1",
+      "response": "smtp;550 5.7.1 Connections not accepted from servers without a valid sender domain. ## Fix reverse DNS for 203.0.113.9",
+      "category": "blocked",
+      "permanent": true,
+      "about_us": true,
+      "links": [
+        "https://www.att.com/support/article/email-support/KM1401980/"
+      ]
+    },
+    {
+      "provider": "Zoho",
+      "reply": 550,
+      "status": "5.7.1",
+      "response": "smtp;550 5.7.1 Email rejected per DMARC policy for zoho.com",
+      "category": "blocked",
+      "permanent": true,
+      "links": [
+        "https://help.zoho.com/portal/en/community/topic/preventing-spam-emails-using-zoho-com-enforcing-spf-dkim-and-dmarc-for-zoho-com-accounts"
+      ]
+    },
+    {
+      "provider": "Zoho",
+      "reply": 550,
+      "status": "5.1.1",
+      "response": "smtp;550 5.1.1 <example@zoho.com> User unknown",
+      "category": "invalid",
+      "permanent": true
+    },
+    {
+      "provider": "Free",
+      "reply": 550,
+      "response": "smtp;550 spam detected",
+      "category": "blocked",
+      "permanent": true,
+      "links": [
+        "https://postmaster.free.fr/index_en.html"
+      ]
+    },
+    {
+      "provider": "Free",
+      "reply": 550,
+      "status": "5.2.2",
+      "response": "smtp;550 5.2.2 user quota exceeded",
+      "category": "full",
+      "permanent": true,
+      "links": [
+        "https://postmaster.free.fr/index_en.html"
+      ]
+    },
+    {
+      "provider": "Free",
+      "reply": 550,
+      "status": "5.2.1",
+      "response": "smtp;550 5.2.1 This mailbox has been blocked due to inactivity",
+      "category": "invalid",
+      "permanent": true,
+      "links": [
+        "https://postmaster.free.fr/index_en.html"
+      ]
+    },
+    {
+      "provider": "Rackspace",
+      "reply": 550,
+      "status": "5.1.1",
+      "response": "smtp;550 5.1.1 Email address could not be found, or was misspelled (G8)",
+      "category": "invalid",
+      "permanent": true,
+      "links": [
+        "https://postmaster.apps.rackspace.com/system-info/response-codes"
+      ]
+    },
+    {
+      "provider": "ProtonMail",
+      "reply": 550,
+      "status": "5.7.1",
+      "response": "smtp;550 5.7.1 Rejected by spam filter (in reply to end of DATA command)",
+      "category": "blocked",
+      "permanent": true
+    },
+    {
+      "provider": "ImprovMX",
+      "reply": 550,
+      "status": "5.7.1",
+      "response": "smtp;550 5.7.1 Message considered as SPAM",
+      "category": "blocked",
+      "permanent": true
+    },
+    {
+      "provider": "QQ",
+      "reply": 550,
+      "response": "smtp;550 Mail content denied. http://service.exmail.qq.com/cgi-bin/help?subtype=1&&id=20022&&no=1000726",
+      "category": "blocked",
+      "permanent": true,
+      "links": [
+        "http://service.exmail.qq.com/cgi-bin/help?subtype=1&&id=20022&&no=1000726"
+      ]
+    },
+    {
+      "provider": "QQ",
+      "reply": 550,
+      "response": "smtp;550 Suspected spam sender.",
+      "category": "blocked",
+      "permanent": true,
+      "links": [
+        "https://service.mail.qq.com/cgi-bin/help?subtype=1&&id=20022&&no=1001461"
+      ]
+    },
+    {
+      "provider": "Hey",
+      "reply": 550,
+      "status": "5.1.1",
+      "response": "smtp;550 5.1.1 <example@hey.com>: Recipient address rejected: User unknown",
+      "category": "invalid",
+      "permanent": true
+    },
+    {
+      "provider": "Infomaniak",
+      "reply": 550,
+      "status": "5.7.1",
+      "response": "smtp;550 5.7.1 rejected by DMARC policy for example.com (in reply to end of DATA command),",
+      "category": "blocked",
+      "permanent": true
+    },
+    {
+      "provider": "Hostpoint",
+      "reply": 550,
+      "status": "5.0.0",
+      "response": "smtp;550-SPF-check failed: 550 example.com doesn't allow sending mails from 203.0.113.9 (in reply to MAIL FROM command)",
+      "category": "blocked",
+      "permanent": true,
+      "about_us": true
+    },
+    {
+      "provider": "Orange",
+      "reply": 550,
+      "status": "5.2.0",
+      "response": "smtp;550 5.2.0 Mail rejete. Mail rejected. ofr_506 [506]",
+      "category": "unknown",
+      "permanent": true
+    },
+    {
+      "provider": "Orange",
+      "reply": 550,
+      "status": "5.1.1",
+      "response": "smtp;550 5.1.1 Adresse d au moins un destinataire invalide. Invalid recipient. OFR_416 [416]",
+      "category": "invalid",
+      "permanent": true
+    },
+    {
+      "provider": "Orange",
+      "reply": 550,
+      "status": "4.0.0",
+      "response": "smtp;550 mwinfXXXX ME Adresse IP source bloquee pour incident de spam. Client host blocked for spamming issues. OFR006_102 Ref http://csi.cloudmark.com/reset-request/?ip=203.0.113.9 [102]",
+      "category": "blocked",
+      "permanent": true,
+      "about_us": true,
+      "links": [
+        "http://csi.cloudmark.com/reset-request"
+      ]
+    },
+    {
+      "provider": "Web.de",
+      "reply": 550,
+      "response": "smtp;550 <example@example.com>: Syntax error in parameters or arguments",
+      "category": "unknown",
+      "permanent": true,
+      "links": [
+        "https://postmaster.web.de/en/best-practice"
+      ]
+    },
+    {
+      "provider": "Web.de",
+      "reply": 550,
+      "response": "smtp;550 <example@example.com>: Requested mail action aborted: exceeded storage allocation, Quota exceeded",
+      "category": "full",
+      "permanent": true,
+      "links": [
+        "https://postmaster.web.de/en/error-messages"
+      ]
+    },
+    {
+      "filter": "Mimecast",
+      "reply": 550,
+      "response": "smtp;550 Administrative prohibition - envelope blocked - https://community.mimecast.com/docs/DOC-1369#550 [#]",
+      "category": "blocked",
+      "permanent": true
+    },
+    {
+      "filter": "Mimecast",
+      "reply": 550,
+      "response": "smtp;550 Rejected by header based manually Blocked Senders: email@example.com - https://community.mimecast.com/docs/DOC-1369#550 [#]",
+      "category": "blocked",
+      "permanent": true
+    },
+    {
+      "filter": "Mimecast",
+      "reply": 550,
+      "response": "smtp;550 Envelope blocked - User Entry - https://community.mimecast.com/docs/DOC-1369#550 [#]",
+      "category": "blocked",
+      "permanent": true,
+      "links": [
+        "https://community.mimecast.com/s/article/Mimecast-SMTP-Error-Codes-842605754"
+      ]
+    },
+    {
+      "filter": "Proofpoint",
+      "reply": 550,
+      "status": "5.1.1",
+      "response": "smtp;550 5.1.1 <email@example>: Recipient address rejected: User unknown",
+      "category": "invalid",
+      "permanent": true
+    },
+    {
+      "filter": "Proofpoint",
+      "reply": 550,
+      "status": "5.1.1",
+      "response": "smtp;550 5.1.1 <email@example.com>: Recipient address rejected: undeliverable address: host example.com[x.xx.xx.xx] said: 550 5.1.1 <email@example.com>: Recipient address rejected: user unknown",
+      "category": "invalid",
+      "permanent": true
+    },
+    {
+      "filter": "Proofpoint",
+      "reply": 550,
+      "status": "5.1.1",
+      "response": "smtp;550 5.1.1 User Unknown",
+      "category": "invalid",
+      "permanent": true
+    },
+    {
+      "filter": "Proofpoint",
+      "reply": 550,
+      "status": "5.1.1",
+      "response": "smtp;550 5.1.1 - This is not a valid email address. Please verify that you have the correct email address for your recipient.",
+      "category": "invalid",
+      "permanent": true
+    },
+    {
+      "filter": "Proofpoint",
+      "reply": 550,
+      "status": "5.1.8",
+      "response": "smtp;550 5.1.8 <sender@example.com>: Sender address rejected: Domain not found (in reply to RCPT TO command)",
+      "category": "blocked",
+      "permanent": true
+    },
+    {
+      "filter": "Proofpoint",
+      "reply": 550,
+      "status": "5.1.8",
+      "response": "smtp;550 5.1.8 Domain of sender address does not exist",
+      "category": "blocked",
+      "permanent": true
+    },
+    {
+      "filter": "Proofpoint",
+      "reply": 550,
+      "status": "5.5.2",
+      "response": "smtp;550 5.5.2 <email@example.com>: Sender address rejected: need fully-qualified address (in reply to RCPT TO command)",
+      "category": "blocked",
+      "permanent": true
+    },
+    {
+      "filter": "Proofpoint",
+      "reply": 550,
+      "status": "5.7.0",
+      "response": "smtp;550 5.7.0 Email rejected per sender's DMARC policy",
+      "category": "blocked",
+      "permanent": true
+    },
+    {
+      "filter": "Proofpoint",
+      "reply": 550,
+      "status": "5.7.1",
+      "response": "smtp;550 5.7.1 Relaying denied",
+      "category": "blocked",
+      "permanent": true,
+      "links": [
+        "https://help.proofpoint.com/Proofpoint_Essentials/Email_Security/Administrator_Topics/110_logs/Common_Error_Codes_found_in_Message_Details"
+      ]
+    },
+    {
+      "filter": "Proofpoint",
+      "reply": 550,
+      "status": "5.7.1",
+      "response": "smtp;550 5.7.1 Relay access denied",
+      "category": "blocked",
+      "permanent": true
+    },
+    {
+      "filter": "Proofpoint",
+      "reply": 550,
+      "status": "5.7.1",
+      "response": "smtp;550 5.7.1 Service unavailable; client [203.0.113.9] blocked using prs.proofpoint.com",
+      "category": "blocked",
+      "permanent": true,
+      "about_us": true,
+      "links": [
+        "https://ipcheck.proofpoint.com"
+      ]
+    },
+    {
+      "filter": "Proofpoint",
+      "reply": 550,
+      "status": "5.7.1",
+      "response": "smtp;550 5.7.1 Service unavailable; client [203.0.113.9] blocked using Cloudmark Sender Intelligence (Visit http://csi.cloudmark.com/reset-request/ if you feel this is in error)",
+      "category": "blocked",
+      "permanent": true,
+      "about_us": true,
+      "links": [
+        "http://csi.cloudmark.com/reset-request/"
+      ]
+    },
+    {
+      "filter": "Exchange Online Protection",
+      "reply": 550,
+      "status": "5.7.1",
+      "response": "smtp;550 5.7.1 Service unavailable, Client host [203.0.113.9] blocked using Spamhaus. To request removal from this list see https://www.spamhaus.org/query/ip/203.0.113.9 (AS16012611)",
+      "category": "blocked",
+      "permanent": true,
+      "about_us": true,
+      "links": [
+        "https://www.spamhaus.org/lookup/"
+      ]
+    },
+    {
+      "filter": "Exchange Online Protection",
+      "reply": 550,
+      "status": "5.7.1",
+      "response": "550 5.7.1 Service unavailable, Helo domain is listed in Spamhaus. To request removal from this list see https://www.spamhaus.org/query/lookup/ (S8001) [#.prod.protection.outlook.com]",
+      "category": "blocked",
+      "permanent": true,
+      "links": [
+        "https://www.spamhaus.org/lookup/"
+      ]
+    },
+    {
+      "filter": "Exchange Online Protection",
+      "reply": 550,
+      "status": "5.7.606",
+      "response": "smtp;550 5.7.606 Access denied, banned sending IP [203.0.113.9]. To request removal from this list please visit https://sender.office.com/ and follow the directions. For more information please go to  http://go.microsoft.com/fwlink/?LinkID=526655 (AS16012609)",
+      "category": "blocked",
+      "permanent": true,
+      "about_us": true,
+      "links": [
+        "https://sender.office.com/"
+      ]
+    },
+    {
+      "filter": "Barracuda",
+      "reply": 550,
+      "response": "smtp;550 cuda_nsu 5.1.1 <email@example.com>... User unknown",
+      "category": "invalid",
+      "permanent": true
+    },
+    {
+      "filter": "Barracuda",
+      "reply": 550,
+      "response": "smtp;550 No such user (email@example.com)",
+      "category": "invalid",
+      "permanent": true
+    },
+    {
+      "filter": "Barracuda",
+      "reply": 550,
+      "response": "smtp;550 Blocked",
+      "category": "blocked",
+      "permanent": true,
+      "links": [
+        "https://campus.barracuda.com/product/emailsecuritygateway/doc/39815000/smtp-error-codes/"
+      ]
+    },
+    {
+      "filter": "Barracuda",
+      "reply": 550,
+      "response": "smtp;550 permanent failure for one or more recipients (email@example.com:blocked)",
+      "category": "blocked",
+      "permanent": true,
+      "links": [
+        "https://campus.barracuda.com/product/emailsecuritygateway/knowledgebase/50160000000GWZ9AAO/My+emails+to+recipients+with+a+Barracuda+Spam+Firewall+keep+getting+blocked!+What+do+I+do/"
+      ]
+    },
+    {
+      "filter": "Trend Micro",
+      "reply": 550,
+      "status": "5.7.1",
+      "response": "smtp;550 5.7.1 <example@example.com>: Recipient address rejected: ERS-Customized-Block.",
+      "category": "blocked",
+      "permanent": true,
+      "links": [
+        "https://success.trendmicro.com/solution/TP000087438-How-do-I-edit-Reputation-Settings"
+      ]
+    },
+    {
+      "filter": "FireEye",
+      "reply": 550,
+      "status": "5.7.26",
+      "response": "smtp;550 5.7.26 <example@example.com>: ETP205 DMARC Failure for domain",
+      "category": "blocked",
+      "permanent": true
+    },
+    {
+      "provider": "ImprovMX",
+      "reply": 551,
+      "status": "5.7.1",
+      "response": "smtp;551 5.7.1 Due to the very low reputation of the sending domain, this message has been blocked (Code 2).",
+      "category": "blocked",
+      "permanent": true
+    },
+    {
+      "provider": "ImprovMX",
+      "reply": 551,
+      "status": "5.7.1",
+      "response": "smtp;551 5.7.1 Loop detected: Email is sent and forwarded from/to improvmx.com. (#id-5.9.0)",
+      "category": "blocked",
+      "permanent": true
+    },
+    {
+      "provider": "ImprovMX",
+      "reply": 551,
+      "status": "5.7.1",
+      "response": "smtp;551 5.7.1 Our database returned invalid pieces of information about the requested recipient’s domain (#id-5.9.3)",
+      "category": "blocked",
+      "permanent": true
+    },
+    {
+      "provider": "ImprovMX",
+      "reply": 551,
+      "status": "5.7.1",
+      "response": "smtp;551 5.7.1 Unable to correctly read the forwarding recipient (where to forward the email to) (#id-5.9.5)",
+      "category": "blocked",
+      "permanent": true
+    },
+    {
+      "provider": "Yandex",
+      "reply": 551,
+      "status": "5.3.0",
+      "response": "smtp;551 5.3.0 Unknown error",
+      "category": "blocked",
+      "permanent": true
+    },
+    {
+      "provider": "Google",
+      "reply": 552,
+      "status": "5.2.2",
+      "response": "smtp;552 5.2.2 The email account that you tried to reach is over quota. Please direct the recipient to https://support.google.com/mail/?p=OverQuotaPerm - gsmtp",
+      "category": "full",
+      "permanent": true,
+      "links": [
+        "https://support.google.com/mail/answer/81126"
+      ]
+    },
+    {
+      "provider": "Google",
+      "reply": 552,
+      "status": "5.2.3",
+      "response": "SMTP; 552-5.2.3 Your message exceeded Google's message size limits. Please visit http://mail.google.com/support/bin/answer.py?answer=8770 to review our size guidelines.",
+      "category": "oversized",
+      "permanent": true,
+      "links": [
+        "http://mail.google.com/support/bin/answer.py?answer=8770"
+      ]
+    },
+    {
+      "provider": "Google",
+      "reply": 552,
+      "status": "5.7.0",
+      "response": "SMTP; 552-5.7.0 Our system detected an illegal attachment on your message. Please visit http://mail.google.com/support/bin/answer.py?answer=6590 to review our attachment guidelines.",
+      "category": "blocked",
+      "permanent": true,
+      "links": [
+        "http://mail.google.com/support/bin/answer.py?answer=6590"
+      ]
+    },
+    {
+      "provider": "Zoho",
+      "reply": 552,
+      "status": "5.7.1",
+      "response": "smtp;552 5.7.1 virus [name] detected by Zoho Mail",
+      "category": "blocked",
+      "permanent": true
+    },
+    {
+      "provider": "Yandex",
+      "reply": 552,
+      "status": "5.2.2",
+      "response": "smtp;552 5.2.2 Mailbox size limit exceeded",
+      "category": "full",
+      "permanent": true,
+      "links": [
+        "https://yandex.com/support/mail/bounces/yandex.html"
+      ]
+    },
+    {
+      "provider": "Apple",
+      "reply": 552,
+      "status": "5.2.2",
+      "response": "smtp;552 5.2.2 <example@icloud.com>: user is overquota",
+      "category": "full",
+      "permanent": true,
+      "links": [
+        "https://support.apple.com/en-us/HT204137"
+      ]
+    },
+    {
+      "provider": "Free",
+      "reply": 552,
+      "status": "5.2.2",
+      "response": "smtp;552 5.2.2 user quota exceeded (UserSearch)",
+      "category": "full",
+      "permanent": true
+    },
+    {
+      "provider": "GMX",
+      "reply": 552,
+      "response": "smtp;552 Requested mail action aborted: exceeded storage allocation Quota exceeded.",
+      "category": "full",
+      "permanent": true,
+      "links": [
+        "https://postmaster.gmx.net/en/error-messages"
+      ]
+    },
+    {
+      "provider": "Google",
+      "reply": 553,
+      "status": "5.1.2",
+      "response": "smtp;553 5.1.2 The recipient address <example@example.com> is not a valid RFC-5321 address. - gsmtp",
+      "category": "invalid",
+      "permanent": true,
+      "links": [
+        "https://tools.ietf.org/html/rfc5321"
+      ]
+    },
+    {
+      "provider": "Yahoo Inc",
+      "reply": 553,
+      "status": "5.7.1",
+      "response": "host xx.yahoodns.net [x.xx.xx.xx] SMTP error from remote mail server after MAIL FROM:<user@example.com> SIZE=2022: 553 5.7.1 [BL21] Connections will not be accepted from 203.0.113.9, because the ip is in Spamhaus's list; see http://postmaster.yahoo.com/550-bl23.html",
+      "category": "blocked",
+      "permanent": true,
+      "about_us": true,
+      "links": [
+        "https://postmaster.yahooinc.com/",
+        "https://postmaster.yahooinc.com/error-codes"
+      ]
+    },
+    {
+      "provider": "Yahoo Inc",
+      "reply": 554,
+      "status": "5.5.4",
+      "response": "smtp;554 delivery error: dd Requested mail action aborted - example.yahoo.com",
+      "category": "unknown",
+      "permanent": true,
+      "links": [
+        "https://postmaster.yahooinc.com/",
+        "https://postmaster.yahooinc.com/error-codes"
+      ]
+    },
+    {
+      "provider": "Yahoo Inc",
+      "reply": 554,
+      "status": "5.7.9",
+      "response": "smtp;554 5.7.9 Message not accepted for policy reasons. See https://postmaster.yahooinc.com/error-codes",
+      "category": "blocked",
+      "permanent": true,
+      "links": [
+        "https://postmaster.yahooinc.com/",
+        "https://postmaster.yahooinc.com/error-codes"
+      ]
+    },
+    {
+      "provider": "Yandex",
+      "reply": 554,
+      "status": "5.7.1",
+      "response": "smtp;554 5.7.1 [1] Message rejected under suspicion of SPAM; https://ya.cc/1IrBc ##",
+      "category": "blocked",
+      "permanent": true,
+      "links": [
+        "https://yandex.ru/support/mail/web/spam.html#troubleshooting__sending-limits"
+      ]
+    },
+    {
+      "provider": "Apple",
+      "reply": 554,
+      "status": "5.7.1",
+      "response": "smtp;554 5.7.1 <example@icloud.com>: Relay access denied",
+      "category": "blocked",
+      "permanent": true,
+      "links": [
+        "https://support.apple.com/en-us/HT204137"
+      ]
+    },
+    {
+      "provider": "Apple",
+      "reply": 554,
+      "status": "5.7.1",
+      "response": "smtp;554 5.7.1 [CS01] Message rejected due to local policy. Please visit https://support.apple.com/en-us/HT204137",
+      "category": "blocked",
+      "permanent": true,
+      "links": [
+        "https://support.apple.com/en-us/HT204137"
+      ]
+    },
+    {
+      "provider": "Rambler",
+      "reply": 554,
+      "status": "5.7.1",
+      "response": "smtp;554 5.7.1 Spam message rejected; If this is not spam contact abuse",
+      "category": "blocked",
+      "permanent": true,
+      "links": [
+        "https://help.rambler.ru/feedback/mail/form/144"
+      ]
+    },
+    {
+      "provider": "Zoho",
+      "reply": 554,
+      "status": "5.7.1",
+      "response": "smtp;554 5.7.1 Email cannot be delivered. Reason: Email flagged as Spam.",
+      "category": "blocked",
+      "permanent": true,
+      "links": [
+        "https://www.zoho.com/mail/help/spam-reason.html"
+      ]
+    },
+    {
+      "provider": "Free",
+      "reply": 554,
+      "status": "5.2.2",
+      "response": "smtp;554 5.2.2 <example@free.fr>: Recipient address rejected: Quota exceeded (mailbox for user is full)",
+      "category": "full",
+      "permanent": true,
+      "links": [
+        "https://postmaster.free.fr/index_en.html"
+      ]
+    },
+    {
+      "provider": "Comcast",
+      "reply": 554,
+      "response": "554 xx.comcast.net comcast 203.0.113.9 Comcast block for spam. Please see http://postmaster.comcast.net/smtp-error-codes.php#BL000000",
+      "category": "blocked",
+      "permanent": true,
+      "about_us": true,
+      "links": [
+        "http://postmaster.comcast.net/smtp-error-codes.php#BL000000"
+      ]
+    },
+    {
+      "filter": "Proofpoint",
+      "reply": 554,
+      "status": "5.7.1",
+      "response": "smtp;554 5.7.1 <email@example>: Relay access denied",
+      "category": "blocked",
+      "permanent": true,
+      "links": [
+        "https://help.proofpoint.com/Proofpoint_Essentials/Email_Security/Administrator_Topics/040_usersandgroups/Outbound_mail_rejected_-_554_5.7.1%3A_Relay_access_denied"
+      ]
+    },
+    {
+      "filter": "Trend Micro",
+      "reply": 554,
+      "response": "smtp;554 5.7.1 <example@example.com>: Recipient address rejected: BLOCK-SEND-ER.",
+      "category": "blocked",
+      "permanent": true,
+      "links": [
+        "https://success.trendmicro.com/solution/1055758-blocking-an-email-address-or-domain-in-hosted-email-security-hes#collapseTwo"
+      ]
+    },
+    {
+      "filter": "Trend Micro",
+      "reply": 554,
+      "response": "smtp;554 5.7.1 <example@example.com>: Recipient address rejected: NO-DOMAIN.",
+      "category": "blocked",
+      "permanent": true,
+      "links": [
+        "https://success.trendmicro.com/solution/1120618-send-outbound-mails-to-trend-micro-email-security-tmems-failed-with-554-return-code"
+      ]
+    },
+    {
+      "filter": "Trend Micro",
+      "reply": 554,
+      "response": "smtp;554 5.7.1 <example@example.com>: Recipient address rejected: BLOCK-RCPT.",
+      "category": "blocked",
+      "permanent": true
+    },
+    {
+      "filter": "Barracuda",
+      "reply": 554,
+      "response": "smtp;554 rejected due to spam URL in content",
+      "category": "blocked",
+      "permanent": true,
+      "links": [
+        "http://multirbl.valli.org"
+      ]
+    }
+  ]
+}
