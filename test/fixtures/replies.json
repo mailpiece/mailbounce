@@ -73,6 +73,8 @@
       "category": "blocked",
       "permanent": false,
       "about_us": true,
+      "slow_down": true,
+      "blocklisted": true,
       "links": [
         "https://support.google.com/mail/answer/81126"
       ]
@@ -120,6 +122,7 @@
       "category": "blocked",
       "permanent": false,
       "about_us": true,
+      "slow_down": true,
       "links": [
         "https://postmaster.yahooinc.com/",
         "https://postmaster.yahooinc.com/error-codes"
@@ -159,6 +162,7 @@
       "response": "smtp;421 4.7.1 Messages to example@icloud.com deferred due to excessive volume. Try again later - https://support.apple.com/en-us/HT204137",
       "category": "blocked",
       "permanent": false,
+      "slow_down": true,
       "links": [
         "https://support.apple.com/en-us/HT204137"
       ]
@@ -169,7 +173,8 @@
       "status": "4.3.2",
       "response": "smtp;421 4.3.2 The maximum number of concurrent connections per resource forest has exceeded a limit, closing transmission channel. example.com. PRX8 [example.com]",
       "category": "blocked",
-      "permanent": false
+      "permanent": false,
+      "slow_down": true
     },
     {
       "filter": "Barracuda",
@@ -336,7 +341,9 @@
       "response": "451 4.7.650 The mail server [203.0.113.9] has been temporarily rate limited due to IP reputation. For e-mail delivery information, see https://postmaster.live.com (S843)[#.prod.protection.outlook.com]",
       "category": "blocked",
       "permanent": false,
-      "about_us": true
+      "about_us": true,
+      "slow_down": true,
+      "blocklisted": true
     },
     {
       "provider": "Outlook",
@@ -345,7 +352,9 @@
       "response": "451 4.7.651 The mail server [203.0.113.9] has been temporarily rate limited due to IP reputation. For e-mail delivery information, see https://postmaster.live.com (S3114) [#.prod.outlook.com #]",
       "category": "blocked",
       "permanent": false,
-      "about_us": true
+      "about_us": true,
+      "slow_down": true,
+      "blocklisted": true
     },
     {
       "provider": "Yandex",
@@ -410,7 +419,8 @@
       "response": "smtp;451 4.7.500 Server busy. Please try again later from [203.0.113.9]. (AS77712344) [#.prod.protection.outlook.com]",
       "category": "blocked",
       "permanent": false,
-      "about_us": true
+      "about_us": true,
+      "slow_down": true
     },
     {
       "filter": "Barracuda",
@@ -510,7 +520,8 @@
       "status": "4.5.3",
       "response": "smtp;452 4.5.3  rate limit exceeded",
       "category": "blocked",
-      "permanent": false
+      "permanent": false,
+      "slow_down": true
     },
     {
       "provider": "Outlook",
@@ -690,6 +701,7 @@
       "response": "smtp;550 5.7.1 Your email was rejected due to having a domain present in the Spamhaus DBL -- see https://www.spamhaus.org/dbl/",
       "category": "blocked",
       "permanent": true,
+      "blocklisted": true,
       "links": [
         "https://www.spamhaus.org/lookup/"
       ]
@@ -731,6 +743,7 @@
       "response": "smtp;550 5.7.1 Service unavailable, MailFrom domain is listed in Spamhaus. To request removal from this list see https://www.spamhaus.org/query/lookup/ (S8002) [#.eop-nam02.prod.protection.outlook.com]",
       "category": "blocked",
       "permanent": true,
+      "blocklisted": true,
       "links": [
         "https://www.spamhaus.org/lookup/"
       ]
@@ -743,6 +756,7 @@
       "category": "blocked",
       "permanent": true,
       "about_us": true,
+      "blocklisted": true,
       "links": [
         "https://sendersupport.olc.protection.outlook.com/pm/troubleshooting.aspx"
       ]
@@ -902,6 +916,7 @@
       "response": "smtp;550 Sender frequency limited. http://service.exmail.qq.com/cgi-bin/help?subtype=1&&id=20022&&no=1000723",
       "category": "blocked",
       "permanent": true,
+      "slow_down": true,
       "links": [
         "http://service.exmail.qq.com/cgi-bin/help?subtype=1&&id=20022&&no=1000723"
       ]
@@ -975,6 +990,7 @@
       "category": "blocked",
       "permanent": true,
       "about_us": true,
+      "blocklisted": true,
       "links": [
         "http://csi.cloudmark.com/reset-request"
       ]
@@ -1055,6 +1071,7 @@
       "response": "smtp;550 <example@example.com>: IP address is block listed",
       "category": "blocked",
       "permanent": true,
+      "blocklisted": true,
       "links": [
         "https://postmaster.web.de/en/error-messages"
       ]
@@ -1194,6 +1211,7 @@
       "category": "blocked",
       "permanent": true,
       "about_us": true,
+      "blocklisted": true,
       "links": [
         "https://ipcheck.proofpoint.com"
       ]
@@ -1206,6 +1224,7 @@
       "category": "blocked",
       "permanent": true,
       "about_us": true,
+      "blocklisted": true,
       "links": [
         "http://csi.cloudmark.com/reset-request/"
       ]
@@ -1218,6 +1237,7 @@
       "category": "blocked",
       "permanent": true,
       "about_us": true,
+      "blocklisted": true,
       "links": [
         "https://www.spamhaus.org/lookup/"
       ]
@@ -1229,6 +1249,7 @@
       "response": "550 5.7.1 Service unavailable, Helo domain is listed in Spamhaus. To request removal from this list see https://www.spamhaus.org/query/lookup/ (S8001) [#.prod.protection.outlook.com]",
       "category": "blocked",
       "permanent": true,
+      "blocklisted": true,
       "links": [
         "https://www.spamhaus.org/lookup/"
       ]
@@ -1241,6 +1262,7 @@
       "category": "blocked",
       "permanent": true,
       "about_us": true,
+      "blocklisted": true,
       "links": [
         "https://sender.office.com/"
       ]
@@ -1480,6 +1502,7 @@
       "category": "blocked",
       "permanent": true,
       "about_us": true,
+      "blocklisted": true,
       "links": [
         "https://postmaster.yahooinc.com/",
         "https://postmaster.yahooinc.com/error-codes"

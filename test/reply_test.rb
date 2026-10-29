@@ -11,6 +11,8 @@ class MailBounce::ReplyTest < MailBounce::TestCase
       assert_equal reply["category"].to_sym, rejection.category, reply["response"]
       assert_equal reply["permanent"], rejection.permanent?, reply["response"]
       assert_equal reply.fetch("about_us", false), rejection.about_us?, reply["response"]
+      assert_equal reply.fetch("slow_down", false), rejection.slow_down?, reply["response"]
+      assert_equal reply.fetch("blocklisted", false), rejection.blocklisted?, reply["response"]
     end
   end
 

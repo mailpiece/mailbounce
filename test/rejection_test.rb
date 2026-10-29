@@ -214,6 +214,41 @@ class MailBounce::RejectionTest < MailBounce::TestCase
     assert_equal :blocked, classify("550 5.7.1 The address you tried does not exist").category
   end
 
+  def test_a_reply_putting_it_down_to_how_much_mail_arrives_says_to_slow_down
+    assert classify("421 4.7.0 [TSS04] Messages from #{SENDING_IP} temporarily deferred due to unexpected volume or user complaints").slow_down?
+    assert classify("451 4.7.500 Server busy. Please try again later from [#{SENDING_IP}].").slow_down?
+    refute classify("421 4.7.0 Temporary server error. Please try again later").slow_down?
+  end
+
+  # Quoting our address doesn't make one mailbox's rate about the sender.
+  def test_a_mailbox_receiving_too_much_mail_is_not_a_reason_to_slow_down
+    refute classify("450 4.2.1 The recipient has exceeded message rate limit. Try again later. #{SENDING_IP}").slow_down?
+    refute classify("450 User is receiving mail too quickly").slow_down?
+  end
+
+  def test_a_rate_limit_over_authentication_is_not_one_to_slow_down_for
+    refute classify("421 4.7.32 This mail has been rate limited because there is no DMARC alignment").slow_down?
+    refute classify("421 4.7.0 [#{SENDING_IP}] high rate of unauthenticated mail, rate limited").slow_down?
+  end
+
+  def test_a_reply_naming_a_blocklist_or_the_ips_reputation_is_blocklisted
+    assert classify("550 5.7.1 Service unavailable, Client host [#{SENDING_IP}] blocked using Spamhaus").blocklisted?
+    assert classify("451 4.7.650 The mail server [#{SENDING_IP}] has been temporarily rate limited due to IP reputation.").blocklisted?
+    assert classify("550 5.7.606 Access denied, banned sending IP [#{SENDING_IP}].").blocklisted?
+  end
+
+  # Gmail quotes the sending address when it judges one message, or the sending domain.
+  def test_a_verdict_on_the_message_or_the_domain_is_not_a_blocklisting
+    refute classify("550 5.7.1 [#{SENDING_IP}] Our system has detected that this message is likely unsolicited mail.").blocklisted?
+    refute classify("550 5.7.1 [#{SENDING_IP}] Our system has detected that this message is likely suspicious due to the very low reputation of the sending domain.").blocklisted?
+  end
+
+  def test_a_block_that_names_no_listing_is_not_a_blocklisting
+    refute classify("554 5.7.1 Your IP is not allowed to relay").blocklisted?
+    refute classify("550 5.7.1 Client host [#{SENDING_IP}] blocked by local policy").blocklisted?
+    refute classify("550 5.7.1 Message blocked using content filter").blocklisted?
+  end
+
   def test_a_rejection_matching_nothing_is_unknown_rather_than_guessed
     assert_equal :unknown, classify("Some entirely novel refusal").category
   end

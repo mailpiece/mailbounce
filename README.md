@@ -26,6 +26,7 @@ For senders deciding what to do after a bounce: suppression-list logic that shou
 - [Installation](#installation)
 - [Classifying a Rejection](#classifying-a-rejection)
 - [Categories](#categories)
+- [Blocklisted or Told to Slow Down](#blocklisted-or-told-to-slow-down)
 - [Status](#status)
 - [Permanent Is Not the Same as Final](#permanent-is-not-the-same-as-final)
 - [Reading a Report](#reading-a-report)
@@ -88,6 +89,23 @@ MailBounce.classify(response: "550 5.1.1 rejected because 203.0.113.9 is on a bl
 ```
 
 Without it, that response reads as a recipient failure - and retiring an address over someone else's opinion of your IP is the mistake this library exists to prevent.
+
+## Blocklisted or Told to Slow Down
+
+Both read the wording alone and leave `about_us?` to you: a blocklisting can name your domain rather than your IP, so pair them with `about_us?` when the question is whether your own address is refused.
+
+```ruby
+rejection = MailBounce.classify(response: "550 5.7.1 Service unavailable, Client host [203.0.113.9] blocked using Spamhaus",
+  sending_ip: "203.0.113.9")
+
+rejection.blocklisted? # => true - it names a blocklist or the sending IP's reputation
+rejection.about_us?    # => true
+
+MailBounce.classify(response: "421 4.7.0 [TSS04] Messages from 203.0.113.9 temporarily deferred due to unexpected volume or user complaints").slow_down?
+# => true - the server asks the sender to send less
+```
+
+`slow_down?` leaves out a mailbox receiving too much mail, whose limit is that mailbox's alone, and a rate limit that names authentication, which waiting doesn't lift.
 
 ## Status
 
