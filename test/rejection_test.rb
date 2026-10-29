@@ -201,6 +201,12 @@ class MailBounce::RejectionTest < MailBounce::TestCase
     refute classify("451 Try again later").permanent?
   end
 
+  def test_a_report_diagnostic_is_read_by_its_reply_code
+    assert classify("smtp; 550 User unknown").permanent?
+    assert classify("SMTP;550 User unknown").permanent?
+    refute classify("smtp; 451 Try again later").permanent?
+  end
+
   def test_a_response_with_neither_code_nor_status_claims_no_permanence
     refute classify("Connection reset by peer").permanent?
   end

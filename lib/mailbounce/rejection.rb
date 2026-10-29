@@ -5,7 +5,8 @@ require "mailbounce/status"
 module MailBounce
   # Classifies an SMTP rejection: recipient fault vs sender/exchange.
   class Rejection
-    REPLY_CODE = /\A\s*(?<code>[245]\d\d)\b/
+    # A report's diagnostic comes typed (RFC 3464 §2.3.6), as in `smtp; 550 …`.
+    REPLY_CODE = /\A\s*(?:smtp;\s*)?(?<code>[245]\d\d)\b/i
 
     # RFC 3463 §3.2, class dropped. 1.2 is the system; permanently reported it
     # is as dead as a mailbox (transient 4.1.2 is merely unreachable). 1.10
