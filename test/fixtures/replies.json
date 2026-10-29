@@ -193,10 +193,41 @@
       "permanent": false
     },
     {
+      "provider": "Google",
+      "reply": 450,
+      "status": "4.2.1",
+      "response": "smtp;450 4.2.1 The user you are trying to contact is receiving mail at a rate that prevents additional messages from being delivered. Please resend your message at a later time. If the user is able to receive mail at that time, your message will be delivered. For more information, please visit https://support.google.com/mail/?p=ReceivingRate - gsmtp",
+      "category": "blocked",
+      "permanent": false,
+      "links": [
+        "https://support.google.com/mail/answer/81126"
+      ]
+    },
+    {
+      "provider": "Yahoo Inc",
+      "reply": 450,
+      "status": "4.0.0",
+      "response": "smtp;450 User is receiving mail too quickly",
+      "category": "blocked",
+      "permanent": false,
+      "links": [
+        "https://postmaster.yahooinc.com/",
+        "https://postmaster.yahooinc.com/error-codes"
+      ]
+    },
+    {
       "provider": "Outlook",
       "reply": 450,
       "status": "4.7.3",
       "response": "smtp;450 4.7.3 Organization queue quota exceeded. [outlook.com]",
+      "category": "blocked",
+      "permanent": false
+    },
+    {
+      "provider": "Yandex",
+      "reply": 450,
+      "status": "4.2.1",
+      "response": "smtp;450 4.2.1 The recipient has exceeded message rate limit. Try again later.",
       "category": "blocked",
       "permanent": false
     },
@@ -422,6 +453,28 @@
       "permanent": false
     },
     {
+      "provider": "Comcast",
+      "reply": 452,
+      "status": "4.1.1",
+      "response": "smtp;452 4.1.1 <example@comcast.net> too many recent messages; Try again later",
+      "category": "blocked",
+      "permanent": false,
+      "links": [
+        "http://postmaster.comcast.net/"
+      ]
+    },
+    {
+      "provider": "Comcast",
+      "reply": 452,
+      "status": "4.1.1",
+      "response": "smtp;452 4.1.1 <example@comcast.net> user over quota",
+      "category": "full",
+      "permanent": false,
+      "links": [
+        "http://postmaster.comcast.net/"
+      ]
+    },
+    {
       "provider": "Rambler",
       "reply": 452,
       "status": "4.5.3",
@@ -487,6 +540,18 @@
       "permanent": true,
       "links": [
         "https://support.google.com/mail/answer/81126"
+      ]
+    },
+    {
+      "provider": "Google",
+      "reply": 550,
+      "status": "5.2.1",
+      "response": "smtp;550 5.2.1 The user you are trying to contact is receiving mail at a rate that prevents additional messages from being delivered. For more information, please visit https://support.google.com/mail/?p=ReceivingRatePerm - gsmtp",
+      "category": "blocked",
+      "permanent": true,
+      "links": [
+        "https://support.google.com/mail/answer/81126",
+        "https://krebsonsecurity.com/2016/08/massive-email-bombs-target-gov-addresses/"
       ]
     },
     {
@@ -757,6 +822,16 @@
       "permanent": true,
       "links": [
         "http://service.exmail.qq.com/cgi-bin/help?subtype=1&&id=20022&&no=1000726"
+      ]
+    },
+    {
+      "provider": "QQ",
+      "reply": 550,
+      "response": "smtp;550 Sender frequency limited. http://service.exmail.qq.com/cgi-bin/help?subtype=1&&id=20022&&no=1000723",
+      "category": "blocked",
+      "permanent": true,
+      "links": [
+        "http://service.exmail.qq.com/cgi-bin/help?subtype=1&&id=20022&&no=1000723"
       ]
     },
     {
@@ -1173,6 +1248,17 @@
       "permanent": true
     },
     {
+      "provider": "Comcast",
+      "reply": 552,
+      "status": "5.1.1",
+      "response": "smtp;552 5.1.1 <example@comcast.net> recipient rejected - extended quota violation",
+      "category": "unknown",
+      "permanent": true,
+      "links": [
+        "http://postmaster.comcast.net/"
+      ]
+    },
+    {
       "provider": "GMX",
       "reply": 552,
       "response": "smtp;552 Requested mail action aborted: exceeded storage allocation Quota exceeded.",
@@ -1204,6 +1290,28 @@
       "links": [
         "https://postmaster.yahooinc.com/",
         "https://postmaster.yahooinc.com/error-codes"
+      ]
+    },
+    {
+      "provider": "Outlook",
+      "reply": 554,
+      "status": "5.2.122",
+      "response": "smtp;554 5.2.122 The recipient has exceeded their limit for the number of messages they can receive per hour. For more information go to http://go.microsoft.com/fwlink/?LinkId=526653. (#) [outlook.com]",
+      "category": "blocked",
+      "permanent": true,
+      "links": [
+        "http://go.microsoft.com/fwlink/?LinkId=526653"
+      ]
+    },
+    {
+      "provider": "Outlook",
+      "reply": 554,
+      "status": "5.2.121",
+      "response": "smtp;554 5.2.121 The sender has exceeded the limit for the number of messages they can send to this recipient per hour. For more information go to http://go.microsoft.com/fwlink/?LinkId=526653. [#.prod.outlook.com #]",
+      "category": "blocked",
+      "permanent": true,
+      "links": [
+        "http://go.microsoft.com/fwlink/?LinkId=526653"
       ]
     },
     {

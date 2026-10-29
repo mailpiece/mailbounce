@@ -124,6 +124,14 @@ class MailBounce::RejectionTest < MailBounce::TestCase
     assert_equal :unknown, classify("454 Throttling failure: Daily message quota exceeded.").category
   end
 
+  # A mailbox receiving too much mail or over its quota is there, and retiring it loses a live address.
+  def test_a_status_naming_the_mailbox_yields_to_wording_that_names_another_cause
+    assert_equal :blocked, classify("550 5.2.1 The user you are trying to contact is receiving mail at a rate that prevents additional messages").category
+    assert_equal :full, classify("452 4.1.1 <someone@example.com> user over quota").category
+    assert_equal :unknown, classify("552 5.1.1 <someone@example.com> recipient rejected - extended quota violation").category
+    assert_equal :invalid, classify("550 5.1.1 <rate@example.com>: User unknown").category
+  end
+
   def test_an_unrecognized_condition_yields_to_wording_that_names_the_cause
     assert_equal :invalid, classify("5.0.0 User unknown in relay recipient table").category
   end

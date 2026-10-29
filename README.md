@@ -10,7 +10,7 @@ For senders deciding what to do after a bounce: suppression-list logic that shou
 
 **mailbounce** handles:
 
-- classification — enhanced status code first, then wording, so a bare `5.0.0` paired with a diagnostic still resolves
+- classification — enhanced status code first, then wording, so a bare `5.0.0` paired with a diagnostic still resolves, and wording naming a rate or a quota outranks a status that names the mailbox
 - five categories — invalid, full, oversized, blocked, unknown — what the bounce is actually about, not just its status code
 - sending IP awareness — tells a blocklisted IP apart from a real recipient failure
 - permanent vs category kept separate — what the server claimed and what the rejection was about, reported independently so you decide which to trust
@@ -71,11 +71,11 @@ rejection.about_us?   # => false - the response doesn't quote our own sending IP
 | `:invalid`   | The mailbox doesn't exist - the one category that can last, and only when `permanent?`     |
 | `:full`      | The mailbox exists and is over quota                                                       |
 | `:oversized` | This message was too large; another might not be                                           |
-| `:blocked`   | Policy, reputation, or the network - about the exchange, not the address                   |
+| `:blocked`   | Policy, reputation, rate, or the network - about the exchange, not the address             |
 | `:unknown`   | Nothing matched                                                                            |
 
 
-Classification reads the enhanced status code first, then falls back to wording, since plenty of servers pair a bare `5.0.0` with a diagnostic that names the cause.
+Classification reads the enhanced status code first, then falls back to wording, since plenty of servers pair a bare `5.0.0` with a diagnostic that names the cause. A status that names the mailbox gives way to wording that names another cause, such as a rate or a quota, so a live address isn't read as dead.
 
 Unmatched rejections come back `:unknown` rather than as a guess.
 

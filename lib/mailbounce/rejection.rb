@@ -33,6 +33,12 @@ module MailBounce
     # No bare "quota exceeded": a sender's sending quota says it too.
     FULL_TEXT = /mailbox (?:is )?full|over quota|(?:mailbox|user|disk) quota exceeded|mailbox size limit exceeded|exceeded storage allocation/i
 
+    # How much mail is arriving, at the mailbox or from the sender.
+    RATE_TEXT = /\brate\b|too quickly|too many (?:recent )?messages|frequency|per hour/i
+
+    # A quota or a rate is a cause other than a gone mailbox.
+    OTHER_CAUSE_TEXT = Regexp.union(FULL_TEXT, RATE_TEXT, /quota/i)
+
     OVERSIZED_TEXT = /message (?:is )?too large|exceeds the maximum size|message size limit/i
 
     BLOCKED_TEXT = /blocked|blacklist|spam|denied/i
@@ -82,7 +88,7 @@ module MailBounce
       def categorized_by_status
         if status
           case status.condition
-          when *INVALID_CONDITIONS then :invalid
+          when *INVALID_CONDITIONS then :invalid unless @response.match?(OTHER_CAUSE_TEXT)
           when *FULL_CONDITIONS then :full
           when *OVERSIZED_CONDITIONS then :oversized
           when *SENDER_CONDITIONS then :blocked
@@ -96,7 +102,7 @@ module MailBounce
         when INVALID_TEXT then :invalid
         when FULL_TEXT then :full
         when OVERSIZED_TEXT then :oversized
-        when BLOCKED_TEXT then :blocked
+        when BLOCKED_TEXT, RATE_TEXT then :blocked
         end
       end
 
