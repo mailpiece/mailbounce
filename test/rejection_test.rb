@@ -76,6 +76,15 @@ class MailBounce::RejectionTest < MailBounce::TestCase
     refute classify("550 rejected at 10:30:45", sending_ip: SENDING_IP).about_us?
   end
 
+  # Looking for an address once started again inside every hex run, which made
+  # a long run quadratic, in a diagnostic anyone can send us.
+  def test_a_long_hex_run_is_read_in_step_with_its_length
+    elapsed = Time.now
+    classify("550 #{"a" * 100_000}:g", sending_ip: SENDING_IP).about_us?
+
+    assert_operator Time.now - elapsed, :<, 1, "the run was scanned again from every character in it"
+  end
+
   # A diagnostic naming an unreachable host would otherwise read as a status
   # and retire an address nothing was wrong with.
   def test_a_host_named_in_the_wording_does_not_stand_in_for_a_status

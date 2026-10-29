@@ -38,7 +38,8 @@ module MailBounce
     QUAD = /(?:\d{1,3}\.){3}\d{1,3}/
 
     # Mapped form first: otherwise `\h*(?::\h*){2,}` stops at `::ffff:203`.
-    ADDRESS = /\h*(?::\h*)+:#{QUAD}|#{QUAD}|\h*(?::\h*){2,}/
+    # An IPv6 address starts where a hex run does, or scanning a long run is quadratic.
+    ADDRESS = /(?<![\h:])\h*(?::\h*)+:#{QUAD}|#{QUAD}|(?<![\h:])\h*(?::\h*){2,}/
 
     attr_reader :response
 
