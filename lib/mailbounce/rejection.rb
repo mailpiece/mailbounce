@@ -30,7 +30,8 @@ module MailBounce
     # (busy / temp policy) and 550 (not found / no access / policy).
     INVALID_TEXT = /user unknown|unknown user|no such (?:user|recipient)|recipient not found|invalid recipient/i
 
-    FULL_TEXT = /mailbox full|over quota|quota exceeded|mailbox size limit exceeded|exceeded storage allocation/i
+    # No bare "quota exceeded": a sender's sending quota says it too.
+    FULL_TEXT = /mailbox (?:is )?full|over quota|(?:mailbox|user|disk) quota exceeded|mailbox size limit exceeded|exceeded storage allocation/i
 
     OVERSIZED_TEXT = /message (?:is )?too large|exceeds the maximum size|message size limit/i
 
