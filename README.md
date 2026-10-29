@@ -68,7 +68,7 @@ rejection.about_us?   # => false - the response doesn't quote our own sending IP
 
 | Category     | What it means                                                                              |
 | ------------ | ------------------------------------------------------------------------------------------ |
-| `:invalid`   | The mailbox doesn't exist - the one category that says something lasting about the address |
+| `:invalid`   | The mailbox doesn't exist - the one category that can last, and only when `permanent?`     |
 | `:full`      | The mailbox exists and is over quota                                                       |
 | `:oversized` | This message was too large; another might not be                                           |
 | `:blocked`   | Policy, reputation, or the network - about the exchange, not the address                   |
