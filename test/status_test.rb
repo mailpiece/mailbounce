@@ -66,5 +66,24 @@ class MailBounce::StatusTest < MailBounce::TestCase
     assert_equal "5.7.1", MailBounce::Status.parse("550-5.7.1 blocked").to_s
     assert_equal "5.1.1", MailBounce::Status.parse("Status: 5.1.1").to_s
     assert_equal "5.1.1", MailBounce::Status.parse("smtp; 550 5.1.1 <a@example.com>: User unknown").to_s
+    assert_equal "4.7.1", MailBounce::Status.parse("450 cuda_nsu 4.7.1 <a@example.com>: Recipient address rejected").to_s
+    assert_equal "5.7.1", MailBounce::Status.parse("553 Message filtered. (#5.7.1)").to_s
+  end
+
+  # Past one word, or of another class than the reply, a dotted number is a version, a date or wording.
+  def test_a_status_is_not_read_from_further_into_the_wording
+    assert_nil MailBounce::Status.parse("550 rejected for 5.1.1 reasons")
+    assert_nil MailBounce::Status.parse("451 on 4.10.2026")
+    assert_nil MailBounce::Status.parse("552 Postfix 2.11.3")
+    assert_nil MailBounce::Status.parse("421 on 5.2.1")
+    assert_nil MailBounce::Status.parse("port 2525 to 5.1.1 refused")
+  end
+
+  # Looking past one word after each reply code must stay linear, in a reply anyone can send.
+  def test_a_long_word_after_a_reply_code_is_read_in_step_with_its_length
+    elapsed = Time.now
+    MailBounce::Status.parse("550 #{"a" * 100_000}")
+
+    assert_operator Time.now - elapsed, :<, 1, "the word was scanned again from every character in it"
   end
 end

@@ -248,6 +248,14 @@
       "permanent": false
     },
     {
+      "filter": "Barracuda",
+      "reply": 450,
+      "status": "4.7.1",
+      "response": "smtp;450 cuda_nsu 4.7.1 <email@example.com>: Recipient address rejected: Policy Rejection- Abuse. Go away.",
+      "category": "blocked",
+      "permanent": false
+    },
+    {
       "filter": "Email Security.cloud",
       "reply": 450,
       "response": "smtp;450 Requested action aborted [9] #-#, please visit https://knowledge.broadcom.com/external/article?legacyId=TECH246726 for more details about this error message.",
@@ -410,6 +418,14 @@
       "reply": 451,
       "status": "4.7.1",
       "response": "smtp;451 4.7.1 Try again later",
+      "category": "blocked",
+      "permanent": false
+    },
+    {
+      "filter": "Barracuda",
+      "reply": 451,
+      "status": "4.4.3",
+      "response": "smtp;451 cuda_nsu 4.4.3 Temporary server error. Please try again later",
       "category": "blocked",
       "permanent": false
     },
@@ -1125,6 +1141,14 @@
       ]
     },
     {
+      "filter": "Email Security.cloud",
+      "reply": 550,
+      "status": "5.1.1",
+      "response": "smtp;550 Invalid recipient <email@example.com> (#5.1.1)",
+      "category": "invalid",
+      "permanent": true
+    },
+    {
       "filter": "Trend Micro",
       "reply": 550,
       "status": "5.7.1",
@@ -1306,6 +1330,23 @@
         "https://postmaster.yahooinc.com/",
         "https://postmaster.yahooinc.com/error-codes"
       ]
+    },
+    {
+      "filter": "Email Security.cloud",
+      "reply": 553,
+      "status": "5.7.1",
+      "response": "smtp;553 Message filtered. Refer to the Troubleshooting page at http://www.symanteccloud.com/troubleshooting for more information. (#5.7.1)",
+      "category": "blocked",
+      "permanent": true
+    },
+    {
+      "filter": "Email Security.cloud",
+      "reply": 553,
+      "status": "5.7.1",
+      "response": "smtp;553 you are trying to use me [xx.messagelabs.com] as a relay, but I have not been configured to let you [203.0.113.9, example.com] do this. Please visit www.symanteccloud.com/troubleshooting for more details about this error message and instructions to resolve this issue. (#5.7.1)",
+      "category": "blocked",
+      "permanent": true,
+      "about_us": true
     },
     {
       "provider": "Outlook",

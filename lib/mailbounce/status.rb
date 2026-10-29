@@ -3,10 +3,11 @@ module MailBounce
   class Status
     # Only where a status belongs — not dotted quads in diagnostics (5.1.1.10
     # is an address). Misses a bare `smtp; 5.1.1 …`; that deferral is cheaper
-    # than retiring a mailbox over a host IP read as a status.
+    # than retiring a mailbox over a host IP read as a status. One word may
+    # come between a reply code and a status of its class (`450 cuda_nsu 4.7.1`).
     PATTERN = /
-      (?: \A[ \t]* | [245]\d\d[ \t\-]+ | ^Status[ \t]*:[ \t]* )
-      (?<code>[245]\.\d{1,3}\.\d{1,3}) (?!\.\d)
+      (?: \A[ \t]* | (?<!\d)[245]\d\d[ \t\-]+ | (?<!\d)(?<class>[245])\d\d[ \t]+\w+[ \t]+(?=\k<class>) | ^Status[ \t]*:[ \t]* | \(\# )
+      (?<code>[245]\.\d{1,3}\.\d{1,3}) (?!\.?\d)
     /xi
 
     PERMANENT_CLASS = "5".freeze
