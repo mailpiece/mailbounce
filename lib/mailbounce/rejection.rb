@@ -31,7 +31,7 @@ module MailBounce
     INVALID_TEXT = /user unknown|unknown user|no such (?:user|recipient)|recipient not found|invalid recipient/i
 
     # No bare "quota exceeded": a sender's sending quota says it too.
-    FULL_TEXT = /mailbox (?:is )?full|over quota|(?:mailbox|user|disk) quota exceeded|mailbox size limit exceeded|exceeded storage allocation/i
+    FULL_TEXT = /mailbox (?:is )?full|over ?quota|(?:mailbox|user|disk) quota exceeded|mailbox size limit exceeded|exceeded storage allocation/i
 
     # How much mail is arriving, at the mailbox or from the sender.
     RATE_TEXT = /\brate\b|too quickly|too many (?:recent )?messages|frequency|per hour/i

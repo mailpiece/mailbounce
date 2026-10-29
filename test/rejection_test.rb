@@ -109,6 +109,7 @@ class MailBounce::RejectionTest < MailBounce::TestCase
     assert_equal :invalid, classify("No such user here").category
     assert_equal :invalid, classify("Recipient not found").category
     assert_equal :full, classify("User is over quota").category
+    assert_equal :full, classify("user is overquota").category
     assert_equal :full, classify("Mailbox quota exceeded").category
     assert_equal :full, classify("mailbox is full (MTA-imposed quota exceeded while writing to file /var/mail/bob)").category
     assert_equal :full, classify("Mailbox size limit exceeded").category
