@@ -109,6 +109,7 @@ class MailBounce::RejectionTest < MailBounce::TestCase
     assert_equal :invalid, classify("No such user here").category
     assert_equal :invalid, classify("Recipient not found").category
     assert_equal :full, classify("User is over quota").category
+    assert_equal :full, classify("user is overquota").category
     assert_equal :full, classify("Mailbox quota exceeded").category
     assert_equal :full, classify("mailbox is full (MTA-imposed quota exceeded while writing to file /var/mail/bob)").category
     assert_equal :full, classify("Mailbox size limit exceeded").category
@@ -124,6 +125,31 @@ class MailBounce::RejectionTest < MailBounce::TestCase
     assert_equal :unknown, classify("454 Throttling failure: Daily message quota exceeded.").category
   end
 
+  # A mailbox receiving too much mail or over its quota is there, and retiring it loses a live address.
+  def test_a_status_naming_the_mailbox_yields_to_wording_that_names_another_cause
+    assert_equal :blocked, classify("550 5.2.1 The user you are trying to contact is receiving mail at a rate that prevents additional messages").category
+    assert_equal :full, classify("452 4.1.1 <someone@example.com> user over quota").category
+    assert_equal :unknown, classify("552 5.1.1 <someone@example.com> recipient rejected - extended quota violation").category
+    assert_equal :blocked, classify("552 5.1.1 <someone@example.com> Mailbox delivery failure policy error").category
+    assert_equal :invalid, classify("550 5.1.1 <rate@example.com>: User unknown").category
+    assert_equal :invalid, classify("550 5.1.1 Mailbox does not exist. See https://example.com/postmaster/policies").category
+  end
+
+  def test_a_refusal_over_the_sender_or_the_message_is_blocked_however_it_is_worded
+    assert_equal :blocked, classify("550 5.2.0 Message rejected due to DMARC").category
+    assert_equal :blocked, classify("550 Reject due to SPF policy").category
+    assert_equal :blocked, classify("550 Bad DNS PTR resource record").category
+    assert_equal :blocked, classify("550 IP address is block listed").category
+    assert_equal :blocked, classify("550 Reject due to policy restrictions (IP based)").category
+    assert_equal :blocked, classify("550 rejecting spoofed message").category
+    assert_equal :blocked, classify("554 rejecting banned content").category
+    assert_equal :blocked, classify("550 virus detected").category
+    assert_equal :blocked, classify("501 5.1.0 Emetteur invalide. Invalid Sender.").category
+    assert_equal :blocked, classify("554 Message not allowed - [299]").category
+    assert_equal :unknown, classify("550 Unrouteable address, recipient domain has no DNS records").category
+    assert_equal :unknown, classify("550 Recipient not allowed").category
+  end
+
   def test_an_unrecognized_condition_yields_to_wording_that_names_the_cause
     assert_equal :invalid, classify("5.0.0 User unknown in relay recipient table").category
   end
@@ -136,6 +162,9 @@ class MailBounce::RejectionTest < MailBounce::TestCase
     assert_equal :invalid, classify("550 Invalid recipient").category
     assert_equal :invalid, classify("550 No such recipient here").category
     assert_equal :invalid, classify("550 unknown user").category
+    assert_equal :invalid, classify("550 Local mailbox someone@example.com is unavailable: account is disabled").category
+    assert_equal :invalid, classify("554 delivery error: dd Sorry, your message to someone@example.com cannot be delivered. This mailbox is disabled (554.30).").category
+    assert_equal :invalid, classify("554 delivery error: dd This user doesn't have a example.com account (someone@example.com)").category
   end
 
   def test_mailbox_unavailable_alone_is_not_a_full_mailbox_either
@@ -149,6 +178,8 @@ class MailBounce::RejectionTest < MailBounce::TestCase
     assert_equal :unknown, classify("550 No such sender here").category
     assert_equal :unknown, classify("550 unknown sender").category
     assert_equal :unknown, classify("550 Sender unknown").category
+    assert_equal :unknown, classify("550 Sender mailbox is disabled").category
+    assert_equal :unknown, classify("554 This user doesn't have a sending account").category
   end
 
   # Wording that names no address names ours as readily as theirs, and a
@@ -181,6 +212,41 @@ class MailBounce::RejectionTest < MailBounce::TestCase
 
   def test_a_policy_refusal_reads_as_blocked_however_it_is_worded
     assert_equal :blocked, classify("550 5.7.1 The address you tried does not exist").category
+  end
+
+  def test_a_reply_putting_it_down_to_how_much_mail_arrives_says_to_slow_down
+    assert classify("421 4.7.0 [TSS04] Messages from #{SENDING_IP} temporarily deferred due to unexpected volume or user complaints").slow_down?
+    assert classify("451 4.7.500 Server busy. Please try again later from [#{SENDING_IP}].").slow_down?
+    refute classify("421 4.7.0 Temporary server error. Please try again later").slow_down?
+  end
+
+  # Quoting our address doesn't make one mailbox's rate about the sender.
+  def test_a_mailbox_receiving_too_much_mail_is_not_a_reason_to_slow_down
+    refute classify("450 4.2.1 The recipient has exceeded message rate limit. Try again later. #{SENDING_IP}").slow_down?
+    refute classify("450 User is receiving mail too quickly").slow_down?
+  end
+
+  def test_a_rate_limit_over_authentication_is_not_one_to_slow_down_for
+    refute classify("421 4.7.32 This mail has been rate limited because there is no DMARC alignment").slow_down?
+    refute classify("421 4.7.0 [#{SENDING_IP}] high rate of unauthenticated mail, rate limited").slow_down?
+  end
+
+  def test_a_reply_naming_a_blocklist_or_the_ips_reputation_is_blocklisted
+    assert classify("550 5.7.1 Service unavailable, Client host [#{SENDING_IP}] blocked using Spamhaus").blocklisted?
+    assert classify("451 4.7.650 The mail server [#{SENDING_IP}] has been temporarily rate limited due to IP reputation.").blocklisted?
+    assert classify("550 5.7.606 Access denied, banned sending IP [#{SENDING_IP}].").blocklisted?
+  end
+
+  # Gmail quotes the sending address when it judges one message, or the sending domain.
+  def test_a_verdict_on_the_message_or_the_domain_is_not_a_blocklisting
+    refute classify("550 5.7.1 [#{SENDING_IP}] Our system has detected that this message is likely unsolicited mail.").blocklisted?
+    refute classify("550 5.7.1 [#{SENDING_IP}] Our system has detected that this message is likely suspicious due to the very low reputation of the sending domain.").blocklisted?
+  end
+
+  def test_a_block_that_names_no_listing_is_not_a_blocklisting
+    refute classify("554 5.7.1 Your IP is not allowed to relay").blocklisted?
+    refute classify("550 5.7.1 Client host [#{SENDING_IP}] blocked by local policy").blocklisted?
+    refute classify("550 5.7.1 Message blocked using content filter").blocklisted?
   end
 
   def test_a_rejection_matching_nothing_is_unknown_rather_than_guessed

@@ -28,14 +28,28 @@ module MailBounce
     # not exist" would read as a dead recipient.
     # No "mailbox unavailable": RFC 5321 §4.2.3 uses that phrase for both 450
     # (busy / temp policy) and 550 (not found / no access / policy).
-    INVALID_TEXT = /user unknown|unknown user|no such (?:user|recipient)|recipient not found|invalid recipient/i
+    INVALID_TEXT = /user unknown|unknown user|no such (?:user|recipient)|recipient not found|invalid recipient|local mailbox \S+ is unavailable: account is disabled|message to \S+ cannot be delivered\. this mailbox is disabled|user doesn't have an? \S+ account \(\S+@/i
 
     # No bare "quota exceeded": a sender's sending quota says it too.
-    FULL_TEXT = /mailbox (?:is )?full|over quota|(?:mailbox|user|disk) quota exceeded|mailbox size limit exceeded|exceeded storage allocation/i
+    FULL_TEXT = /mailbox (?:is )?full|over ?quota|(?:mailbox|user|disk) quota exceeded|mailbox size limit exceeded|exceeded storage allocation/i
+
+    # How much mail is arriving, at the mailbox or from the sender.
+    RATE_TEXT = /\brate\b|too quickly|too many (?:recent )?messages|\bvolume\b|frequency|per hour|server busy|concurrent connections/i
+
+    # The server asking the sender to send less, not a mailbox receiving too much.
+    SLOW_DOWN_TEXT = /rate limit|unusual rate|(?:unexpected|excessive) volume|server busy|concurrent connections|sender frequency/i
+
+    # A quota, a rate or a policy error is a cause other than a gone mailbox.
+    OTHER_CAUSE_TEXT = Regexp.union(FULL_TEXT, RATE_TEXT, /quota|policy error/i)
 
     OVERSIZED_TEXT = /message (?:is )?too large|exceeds the maximum size|message size limit/i
 
-    BLOCKED_TEXT = /blocked|blacklist|spam|denied/i
+    BLOCKED_TEXT = /blocked|block ?list|blacklist|spam|denied|(?:message|relay) not allowed|\bpolic(?:y|ies)\b|\bptr\b|spoof|banned|virus|invalid sender/i
+
+    # A rate limit naming authentication is about one domain's mail, and waiting doesn't lift it.
+    AUTHENTICATION_TEXT = /dmarc|\bspf\b|dkim|unauthenticated/i
+
+    BLOCKLIST_TEXT = /spamhaus|block ?list|blacklist|dnsbl|\brbl\b|client(?: host)? \[[^\]]*\] blocked using|client host blocked for spam|banned sending ip|\bip(?: address)? reputation|reputation of (?:the sending |your )?ip\b|mail originating from your ip/i
 
     QUAD = /(?:\d{1,3}\.){3}\d{1,3}/
 
@@ -73,6 +87,15 @@ module MailBounce
       ours.any? { |ip| quoted_addresses.include?(ip) }
     end
 
+    # A status naming the mailbox (x.2.x) limits that mailbox alone.
+    def slow_down?
+      @response.match?(SLOW_DOWN_TEXT) && !@response.match?(AUTHENTICATION_TEXT) && status&.subject != "2"
+    end
+
+    def blocklisted?
+      @response.match?(BLOCKLIST_TEXT)
+    end
+
     def status
       @status ||= Status.parse(@response)
     end
@@ -82,7 +105,7 @@ module MailBounce
       def categorized_by_status
         if status
           case status.condition
-          when *INVALID_CONDITIONS then :invalid
+          when *INVALID_CONDITIONS then :invalid unless @response.match?(OTHER_CAUSE_TEXT)
           when *FULL_CONDITIONS then :full
           when *OVERSIZED_CONDITIONS then :oversized
           when *SENDER_CONDITIONS then :blocked
@@ -96,7 +119,7 @@ module MailBounce
         when INVALID_TEXT then :invalid
         when FULL_TEXT then :full
         when OVERSIZED_TEXT then :oversized
-        when BLOCKED_TEXT then :blocked
+        when BLOCKED_TEXT, RATE_TEXT, AUTHENTICATION_TEXT then :blocked
         end
       end
 

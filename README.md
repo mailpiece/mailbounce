@@ -10,7 +10,7 @@ For senders deciding what to do after a bounce: suppression-list logic that shou
 
 **mailbounce** handles:
 
-- classification — enhanced status code first, then wording, so a bare `5.0.0` paired with a diagnostic still resolves
+- classification — enhanced status code first, then wording, so a bare `5.0.0` paired with a diagnostic still resolves, and wording naming a rate or a quota outranks a status that names the mailbox
 - five categories — invalid, full, oversized, blocked, unknown — what the bounce is actually about, not just its status code
 - sending IP awareness — tells a blocklisted IP apart from a real recipient failure
 - permanent vs category kept separate — what the server claimed and what the rejection was about, reported independently so you decide which to trust
@@ -26,6 +26,7 @@ For senders deciding what to do after a bounce: suppression-list logic that shou
 - [Installation](#installation)
 - [Classifying a Rejection](#classifying-a-rejection)
 - [Categories](#categories)
+- [Blocklisted or Told to Slow Down](#blocklisted-or-told-to-slow-down)
 - [Status](#status)
 - [Permanent Is Not the Same as Final](#permanent-is-not-the-same-as-final)
 - [Reading a Report](#reading-a-report)
@@ -71,11 +72,11 @@ rejection.about_us?   # => false - the response doesn't quote our own sending IP
 | `:invalid`   | The mailbox doesn't exist - the one category that can last, and only when `permanent?`     |
 | `:full`      | The mailbox exists and is over quota                                                       |
 | `:oversized` | This message was too large; another might not be                                           |
-| `:blocked`   | Policy, reputation, or the network - about the exchange, not the address                   |
+| `:blocked`   | Policy, reputation, authentication, content, rate, or the network - not the address        |
 | `:unknown`   | Nothing matched                                                                            |
 
 
-Classification reads the enhanced status code first, then falls back to wording, since plenty of servers pair a bare `5.0.0` with a diagnostic that names the cause.
+Classification reads the enhanced status code first, then falls back to wording, since plenty of servers pair a bare `5.0.0` with a diagnostic that names the cause. A status that names the mailbox gives way to wording that names another cause, such as a rate or a quota, so a live address isn't read as dead.
 
 Unmatched rejections come back `:unknown` rather than as a guess.
 
@@ -88,6 +89,23 @@ MailBounce.classify(response: "550 5.1.1 rejected because 203.0.113.9 is on a bl
 ```
 
 Without it, that response reads as a recipient failure - and retiring an address over someone else's opinion of your IP is the mistake this library exists to prevent.
+
+## Blocklisted or Told to Slow Down
+
+Both read the wording alone and leave `about_us?` to you: a blocklisting can name your domain rather than your IP, so pair them with `about_us?` when the question is whether your own address is refused.
+
+```ruby
+rejection = MailBounce.classify(response: "550 5.7.1 Service unavailable, Client host [203.0.113.9] blocked using Spamhaus",
+  sending_ip: "203.0.113.9")
+
+rejection.blocklisted? # => true - it names a blocklist or the sending IP's reputation
+rejection.about_us?    # => true
+
+MailBounce.classify(response: "421 4.7.0 [TSS04] Messages from 203.0.113.9 temporarily deferred due to unexpected volume or user complaints").slow_down?
+# => true - the server asks the sender to send less
+```
+
+`slow_down?` leaves out a mailbox receiving too much mail, whose limit is that mailbox's alone, and a rate limit that names authentication, which waiting doesn't lift.
 
 ## Status
 
