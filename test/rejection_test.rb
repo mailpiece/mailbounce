@@ -109,12 +109,19 @@ class MailBounce::RejectionTest < MailBounce::TestCase
     assert_equal :invalid, classify("No such user here").category
     assert_equal :invalid, classify("Recipient not found").category
     assert_equal :full, classify("User is over quota").category
-    assert_equal :full, classify("Quota exceeded").category
+    assert_equal :full, classify("Mailbox quota exceeded").category
+    assert_equal :full, classify("mailbox is full (MTA-imposed quota exceeded while writing to file /var/mail/bob)").category
     assert_equal :full, classify("Mailbox size limit exceeded").category
     assert_equal :full, classify("User has exceeded storage allocation").category
     assert_equal :oversized, classify("Message too large").category
     assert_equal :oversized, classify("Message exceeds the maximum size").category
     assert_equal :blocked, classify("Message identified as spam").category
+  end
+
+  # A sending limit is worded like a full mailbox, and says nothing about the recipient.
+  def test_a_quota_named_only_as_exceeded_is_not_a_full_mailbox
+    assert_equal :unknown, classify("Quota exceeded").category
+    assert_equal :unknown, classify("454 Throttling failure: Daily message quota exceeded.").category
   end
 
   def test_an_unrecognized_condition_yields_to_wording_that_names_the_cause
