@@ -168,7 +168,7 @@ recipient.remote_mta         # => "dns; mx.example.com"
 
 Reports announce delays and successes by the same route and in the same shape, so `permanent_failure?` is usually the question worth asking - `Action: delayed` is not a bounce however permanent the covering message reads.
 
-A report naming several recipients speaks for a given address only when it names it; one covering a single recipient needn't name anyone. Nothing raises: a report with no machine-readable part, or bytes that aren't a message at all, reports nothing.
+A report naming several recipients speaks for a given address only when it names it; one covering a single recipient needn't name anyone. Only a `message/delivery-status` part sitting directly in a `multipart/report` is read. Nothing raises: a report with no such part, or bytes that aren't a message at all, reports nothing.
 
 Bounces are capped to 1 MB. Past that a report is refused like any other it can't read. Lower it where you'd rather hold less:
 

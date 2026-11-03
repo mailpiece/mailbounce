@@ -1,5 +1,9 @@
 # Changelog
 
+## Unreleased
+
+- A report's status is read only from a direct part of a `multipart/report`, so deeply nested parts are no longer walked.
+
 ## 0.6.0
 
 - `Rejection#blocklisted?` says whether a reply names a blocklist or the sending IP's reputation, and `Rejection#slow_down?` whether the server asks the sender to send less, leaving out a mailbox receiving too much mail and a rate limit over authentication. Neither checks the sending IP; pair them with `about_us?`.
