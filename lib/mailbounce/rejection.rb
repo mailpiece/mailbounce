@@ -59,8 +59,10 @@ module MailBounce
 
     attr_reader :response
 
+    # Read as bytes: a reply may carry a stray byte or arrive in UTF-16.
     def initialize(response:, sending_ip: nil)
       @response = response.to_s
+      @text = @response.b
       @sending_ips = Array(sending_ip).compact
     end
 
@@ -89,15 +91,15 @@ module MailBounce
 
     # A status naming the mailbox (x.2.x) limits that mailbox alone.
     def slow_down?
-      @response.match?(SLOW_DOWN_TEXT) && !@response.match?(AUTHENTICATION_TEXT) && status&.subject != "2"
+      @text.match?(SLOW_DOWN_TEXT) && !@text.match?(AUTHENTICATION_TEXT) && status&.subject != "2"
     end
 
     def blocklisted?
-      @response.match?(BLOCKLIST_TEXT)
+      @text.match?(BLOCKLIST_TEXT)
     end
 
     def status
-      @status ||= Status.parse(@response)
+      @status ||= Status.parse(@text)
     end
 
     private
@@ -105,7 +107,7 @@ module MailBounce
       def categorized_by_status
         if status
           case status.condition
-          when *INVALID_CONDITIONS then :invalid unless @response.match?(OTHER_CAUSE_TEXT)
+          when *INVALID_CONDITIONS then :invalid unless @text.match?(OTHER_CAUSE_TEXT)
           when *FULL_CONDITIONS then :full
           when *OVERSIZED_CONDITIONS then :oversized
           when *SENDER_CONDITIONS then :blocked
@@ -115,7 +117,7 @@ module MailBounce
       end
 
       def categorized_by_text
-        case @response
+        case @text
         when INVALID_TEXT then :invalid
         when FULL_TEXT then :full
         when OVERSIZED_TEXT then :oversized
@@ -124,7 +126,7 @@ module MailBounce
       end
 
       def reply_code
-        @response[REPLY_CODE, :code]
+        @text[REPLY_CODE, :code]
       end
 
       def ours
@@ -132,7 +134,7 @@ module MailBounce
       end
 
       def quoted_addresses
-        @quoted_addresses ||= @response.scan(ADDRESS).filter_map { |token| address_for(token) }
+        @quoted_addresses ||= @text.scan(ADDRESS).filter_map { |token| address_for(token) }
       end
 
       # `.native` so ::ffff:203.0.113.9 and 203.0.113.9 compare equal.

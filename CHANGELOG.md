@@ -3,6 +3,7 @@
 ## Unreleased
 
 - A report's status is read only from a direct part of a `multipart/report`, so deeply nested parts are no longer walked.
+- A reply with an invalid byte or in an encoding that isn't ASCII-compatible, such as UTF-16, is classified rather than raising.
 
 ## 0.6.0
 
