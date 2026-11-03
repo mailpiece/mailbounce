@@ -3,6 +3,20 @@ require "test_helper"
 class MailBounce::RejectionTest < MailBounce::TestCase
   SENDING_IP = "203.0.113.9".freeze
 
+  # A diagnostic stored and read back may carry a stray byte or another encoding.
+  def test_a_reply_in_any_encoding_is_read_rather_than_raising
+    stray = "550 5.1.1 \xFF blocked using Spamhaus [203.0.113.9]".dup.force_encoding(Encoding::UTF_8)
+    rejection = classify(stray, sending_ip: SENDING_IP)
+
+    assert_equal [ :blocked, "5.1.1", true, true, false ],
+      [ rejection.category, rejection.status.to_s, rejection.blocklisted?, rejection.about_us?, rejection.slow_down? ]
+    assert_same Encoding::UTF_8, rejection.response.encoding
+
+    wide = classify("550 5.1.1 User unknown".encode(Encoding::UTF_16LE))
+
+    assert_equal [ :unknown, false ], [ wide.category, wide.permanent? ]
+  end
+
   def test_a_condition_naming_the_mailbox_is_about_the_recipient
     %w[ 5.1.1 5.1.3 5.1.6 5.2.1 ].each do |status|
       assert_equal :invalid, classify("#{status} <someone@example.com>: recipient rejected").category, status

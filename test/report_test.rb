@@ -252,6 +252,26 @@ class MailBounce::ReportTest < MailBounce::TestCase
     assert_operator Time.now - elapsed, :<, 1, "the block was read again for every line it holds"
   end
 
+  def test_a_status_part_outside_a_report_claims_nothing
+    report = MailBounce.parse(delivery_status("Final-Recipient: rfc822; #{RECIPIENT}\nAction: failed\nStatus: 5.1.1")
+      .sub("multipart/report; report-type=delivery-status", "multipart/mixed"))
+
+    refute report.any?
+  end
+
+  # A real report keeps its status one level down; parts nested far deeper
+  # cost the mail gem time and stack, on a notice anyone can send us.
+  def test_a_deeply_nested_part_is_not_read_into
+    nested = (0...3_000).map { |i| "Content-Type: multipart/mixed; boundary=\"N#{i}\"\r\n\r\n--N#{i}\r\n" }.join
+    report = MailBounce.parse(delivery_status("Final-Recipient: rfc822; #{RECIPIENT}\nAction: failed\nStatus: 5.1.1")
+      .sub("--BB--", "--BB\r\n#{nested}\r\n--BB--"))
+
+    elapsed = Time.now
+
+    assert report.for(RECIPIENT).permanent_failure?
+    assert_operator Time.now - elapsed, :<, 1, "the nested parts were read into"
+  end
+
   def test_a_report_past_the_ceiling_reports_nothing
     oversized = delivery_status("Final-Recipient: rfc822; #{RECIPIENT}\r\nAction: failed")
 

@@ -166,9 +166,15 @@ recipient.remote_mta         # => "dns; mx.example.com"
 | `diagnostic_code` / `remote_mta` | raw diagnostic and reporting-MTA fields, unparsed |
 | `addressed_to?(address)` | used internally by `Report#for`; encoding-aware, case-insensitive comparison |
 
-Reports announce delays and successes by the same route and in the same shape, so `permanent_failure?` is usually the question worth asking - `Action: delayed` is not a bounce however permanent the covering message reads.
+Reports announce delays and successes by the same route and in the same shape, so `permanent_failure?` is usually the question worth asking - `Action: delayed` is not a bounce however permanent the covering message reads. Check the category too: a report's status and its diagnostic are separate claims, and `Status: 5.1.1` beside a diagnostic quoting your sending IP is `:blocked`, not a dead mailbox.
 
-A report naming several recipients speaks for a given address only when it names it; one covering a single recipient needn't name anyone. Nothing raises: a report with no machine-readable part, or bytes that aren't a message at all, reports nothing.
+```ruby
+MailBounce.classify(response: recipient.diagnostic_code, sending_ip: "203.0.113.9").category
+```
+
+Anyone can send a bounce, naming any recipient with any status. Bind each one to a message you sent with a signed VERP return path - the recipient's address in the envelope sender, with a signature only you can make - and act only on `report.for(verp_address)`. Never act on `report.recipients` or `recipient.address`: even a genuine bounce can carry blocks naming other people.
+
+A report naming several recipients speaks for a given address only when it names it; one covering a single recipient needn't name anyone. Only a `message/delivery-status` part sitting directly in a `multipart/report` is read. Nothing raises: a report with no such part, or bytes that aren't a message at all, reports nothing.
 
 Bounces are capped to 1 MB. Past that a report is refused like any other it can't read. Lower it where you'd rather hold less:
 

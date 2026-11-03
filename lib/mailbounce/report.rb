@@ -6,6 +6,8 @@ require "mailbounce/recipient"
 module MailBounce
   # Machine-readable half of a bounce (RFC 3464). Unreadable input reports nothing.
   class Report
+    REPORT_TYPE = "multipart/report".freeze
+
     # RFC 6533 adds the global type for internationalized addresses.
     DELIVERY_STATUS_TYPES = %w[ message/delivery-status message/global-delivery-status ].freeze
 
@@ -127,9 +129,12 @@ module MailBounce
       end
 
       # The mail gem parses and decodes lazily, so unreadable input raises here
-      # rather than at construction.
+      # rather than at construction. Only a direct child of a multipart/report
+      # is read (RFC 3464 §2): walking deeper costs time and stack per level.
       def delivery_status
-        @mail&.all_parts&.find { |part| DELIVERY_STATUS_TYPES.include?(part.mime_type) }&.body&.decoded
+        if @mail&.mime_type == REPORT_TYPE
+          @mail.parts.find { |part| DELIVERY_STATUS_TYPES.include?(part.mime_type) }&.body&.decoded
+        end
       rescue StandardError
         nil
       end
