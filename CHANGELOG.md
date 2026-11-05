@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- `Rejection#authentication?` says whether a reply refuses the mail over SPF, DKIM, DMARC or reverse DNS, and `Rejection#content?` whether it refuses the message as spam or a virus; categories are unchanged.
 - A report's status is read only from a direct part of a `multipart/report`, so deeply nested parts are no longer walked.
 - A reply with an invalid byte or in an encoding that isn't ASCII-compatible, such as UTF-16, is classified rather than raising.
 
