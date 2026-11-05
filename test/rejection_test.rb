@@ -263,6 +263,41 @@ class MailBounce::RejectionTest < MailBounce::TestCase
     refute classify("550 5.7.1 Message blocked using content filter").blocklisted?
   end
 
+  def test_a_failed_authentication_check_is_an_authentication_refusal
+    %w[ 5.7.20 5.7.23 5.7.25 5.7.26 4.7.24 ].each do |status|
+      assert classify("550 #{status} Message rejected").authentication?, status
+    end
+
+    assert classify("550 5.7.1 Unauthenticated email from example.com is not accepted due to domain's DMARC policy").authentication?
+    assert classify("550 SPF check failed").authentication?
+    assert classify("550 No valid DKIM signature found").authentication?
+  end
+
+  def test_a_refusal_naming_no_authentication_is_not_an_authentication_refusal
+    refute classify("550 5.7.1 Message rejected as spam").authentication?
+    refute classify("550 5.7.27 Sender address has null MX").authentication?
+    refute classify("550 5.1.1 User unknown").authentication?
+  end
+
+  def test_a_refusal_of_spam_or_a_virus_is_about_the_content
+    assert classify("550 5.7.1 [#{SENDING_IP}] Our system has detected that this message is likely unsolicited mail.").content?
+    assert classify("554 5.7.1 Message rejected as spam").content?
+    assert classify("554 5.7.0 Virus found: Eicar-Test-Signature").content?
+    assert classify("550 5.7.1 Message contains malware").content?
+  end
+
+  def test_a_blocklisting_or_policy_refusal_is_not_about_the_content
+    refute classify("550 5.7.1 Service unavailable, Client host [#{SENDING_IP}] blocked using Spamhaus").content?
+    refute classify("554 5.7.1 Client host blocked for spam").content?
+    refute classify("550 5.7.1 Client host [#{SENDING_IP}] blocked by local policy").content?
+    refute classify("550 5.7.26 Unauthenticated email is not accepted").content?
+  end
+
+  def test_the_finer_predicates_leave_the_category_as_it_was
+    assert_equal :blocked, classify("550 5.7.26 Unauthenticated email is not accepted").category
+    assert_equal :blocked, classify("554 5.7.1 Message rejected as spam").category
+  end
+
   def test_a_rejection_matching_nothing_is_unknown_rather_than_guessed
     assert_equal :unknown, classify("Some entirely novel refusal").category
   end
