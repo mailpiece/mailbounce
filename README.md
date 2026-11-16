@@ -27,6 +27,7 @@ For senders deciding what to do after a bounce: suppression-list logic that shou
 - [Classifying a Rejection](#classifying-a-rejection)
 - [Categories](#categories)
 - [Blocklisted or Told to Slow Down](#blocklisted-or-told-to-slow-down)
+- [Why It Was Blocked](#why-it-was-blocked)
 - [Status](#status)
 - [Permanent Is Not the Same as Final](#permanent-is-not-the-same-as-final)
 - [Reading a Report](#reading-a-report)
@@ -106,6 +107,26 @@ MailBounce.classify(response: "421 4.7.0 [TSS04] Messages from 203.0.113.9 tempo
 ```
 
 `slow_down?` leaves out a mailbox receiving too much mail, whose limit is that mailbox's alone, and a rate limit that names authentication, which waiting doesn't lift.
+
+## Why It Was Blocked
+
+`:blocked` covers many causes. These predicates name some of them without changing the category, and each can be true of a reply whatever its category:
+
+| Predicate         | True when the reply                                                                                                 |
+| ----------------- | ------------------------------------------------------------------------------------------------------------------- |
+| `about_us?`       | Quotes the `sending_ip` you gave                                                                                    |
+| `blocklisted?`    | Names a blocklist or the sending IP's reputation                                                                    |
+| `slow_down?`      | Asks the sender to send less                                                                                        |
+| `authentication?` | Fails a sender check: an `x.7.20` to `x.7.26` status (DKIM, SPF, reverse DNS), or wording naming DMARC, SPF or DKIM |
+| `content?`        | Refuses this message as spam, phishing or a virus, and names no blocklist                                           |
+
+```ruby
+MailBounce.classify(response: "550 5.7.26 Unauthenticated email from example.com is not accepted due to domain's DMARC policy").authentication?
+# => true
+
+MailBounce.classify(response: "554 5.7.1 Message rejected as spam").content?
+# => true
+```
 
 ## Status
 

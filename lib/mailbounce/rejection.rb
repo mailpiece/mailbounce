@@ -20,6 +20,9 @@ module MailBounce
     # RFC 3463 §3.2: sender's address, not the recipient's.
     SENDER_CONDITIONS = %w[ 1.7 1.8 ].freeze
 
+    # RFC 7372 §3: DKIM, SPF, reverse DNS, or several checks together.
+    AUTHENTICATION_CONDITIONS = %w[ 7.20 7.21 7.22 7.23 7.24 7.25 7.26 ].freeze
+
     # Network, system, protocol, policy — the exchange, not the mailbox.
     BLOCKED_SUBJECTS = %w[ 3 4 5 7 ].freeze
 
@@ -48,6 +51,9 @@ module MailBounce
 
     # A rate limit naming authentication is about one domain's mail, and waiting doesn't lift it.
     AUTHENTICATION_TEXT = /dmarc|\bspf\b|dkim|unauthenticated/i
+
+    # Whole words, so a blocklist named "spamhaus" is not spam.
+    CONTENT_TEXT = /\bspam\b|unsolicited|\b(?:virus|phishing|malware|trojan)\b/i
 
     BLOCKLIST_TEXT = /spamhaus|block ?list|blacklist|dnsbl|\brbl\b|client(?: host)? \[[^\]]*\] blocked using|client host blocked for spam|banned sending ip|\bip(?: address)? reputation|reputation of (?:the sending |your )?ip\b|mail originating from your ip/i
 
@@ -96,6 +102,15 @@ module MailBounce
 
     def blocklisted?
       @text.match?(BLOCKLIST_TEXT)
+    end
+
+    def authentication?
+      AUTHENTICATION_CONDITIONS.include?(status&.condition) || @text.match?(AUTHENTICATION_TEXT)
+    end
+
+    # An IP listed for spam is a blocklisting, not this message's content.
+    def content?
+      @text.match?(CONTENT_TEXT) && !blocklisted?
     end
 
     def status
