@@ -44,6 +44,13 @@ class MailBounce::RejectionTest < MailBounce::TestCase
     end
   end
 
+  # Exchange Online refuses an address its tenant doesn't hold with a routing status.
+  def test_exchange_refusing_an_address_outside_its_directory_is_a_dead_mailbox
+    assert_equal :invalid, classify("550 5.4.1 Recipient address rejected: Access denied. [#.prod.outlook.com]").category
+    assert_equal :blocked, classify("550 5.4.1 Access denied").category
+    assert_equal :blocked, classify("550 5.4.1 Recipient address rejected: Access denied, policy error").category
+  end
+
   def test_a_response_quoting_our_own_address_is_about_us_whatever_it_claims
     rejection = classify("5.1.1 rejected because #{SENDING_IP} is on a blocklist", sending_ip: SENDING_IP)
 

@@ -20,6 +20,10 @@ module MailBounce
     # RFC 3463 §3.2: sender's address, not the recipient's.
     SENDER_CONDITIONS = %w[ 1.7 1.8 ].freeze
 
+    # Bad destination mailbox (RFC 3463 §3.5), which Exchange Online's
+    # directory-based edge blocking uses for an address its tenant doesn't hold.
+    DIRECTORY_CONDITIONS = %w[ 4.1 ].freeze
+
     # Network, system, protocol, policy — the exchange, not the mailbox.
     BLOCKED_SUBJECTS = %w[ 3 4 5 7 ].freeze
 
@@ -43,6 +47,9 @@ module MailBounce
     OTHER_CAUSE_TEXT = Regexp.union(FULL_TEXT, RATE_TEXT, /quota|policy error/i)
 
     OVERSIZED_TEXT = /message (?:is )?too large|exceeds the maximum size|message size limit/i
+
+    # Exchange Online's wording when its directory holds no such recipient.
+    DIRECTORY_REFUSAL_TEXT = /recipient address rejected: access denied/i
 
     BLOCKED_TEXT = /blocked|block ?list|blacklist|spam|denied|(?:message|relay) not allowed|\bpolic(?:y|ies)\b|\bptr\b|spoof|banned|virus|invalid sender/i
 
@@ -111,9 +118,14 @@ module MailBounce
           when *FULL_CONDITIONS then :full
           when *OVERSIZED_CONDITIONS then :oversized
           when *SENDER_CONDITIONS then :blocked
+          when *DIRECTORY_CONDITIONS then refused_by_directory? ? :invalid : :blocked
           else :blocked if BLOCKED_SUBJECTS.include?(status.subject)
           end
         end
+      end
+
+      def refused_by_directory?
+        @text.match?(DIRECTORY_REFUSAL_TEXT) && !@text.match?(OTHER_CAUSE_TEXT)
       end
 
       def categorized_by_text

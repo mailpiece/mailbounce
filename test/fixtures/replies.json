@@ -357,6 +357,17 @@
       "blocklisted": true
     },
     {
+      "provider": "Outlook",
+      "reply": 550,
+      "status": "5.4.1",
+      "response": "smtp;550 5.4.1 Recipient address rejected: Access denied. For more information see https://aka.ms/EXOSmtpErrors [#.prod.outlook.com #]",
+      "category": "invalid",
+      "permanent": true,
+      "links": [
+        "https://learn.microsoft.com/en-us/troubleshoot/exchange/email-delivery/ndr/fix-error-code-550-5-4-1"
+      ]
+    },
+    {
       "provider": "Yandex",
       "reply": 451,
       "status": "4.7.1",
